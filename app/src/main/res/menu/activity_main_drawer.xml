@@ -34,5 +34,11 @@
                 android:title="@string/menu_send" />
         </menu>
     </item>
+    <item
+        android:id="@+id/cerrar_sesion"
+        android:icon="@drawable/ic_close_black_24dp"
+        android:title="Cerrar sesion"
+        />
+
 
 </menu>
