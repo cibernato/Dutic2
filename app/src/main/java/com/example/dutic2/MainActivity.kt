@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var navController: NavController
 
 
+
     lateinit var expandableListView: ExpandableListView
     var titles: MutableList<String> = ArrayList()
     var items: MutableList<MutableList<String>> = ArrayList()
