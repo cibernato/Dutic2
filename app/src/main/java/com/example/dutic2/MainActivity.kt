@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mAuthStateListener = FirebaseAuth.AuthStateListener {
             val user = it.currentUser
             if (user != null) {
-                Toast.makeText(this, "logged in", Toast.LENGTH_SHORT).show()
+                Log.d("FirebaseAuth",".AuthStateListener Logged in")
             } else {
                 val providers = arrayListOf(
                     AuthUI.IdpConfig.EmailBuilder().build(),

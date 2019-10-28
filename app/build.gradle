@@ -37,9 +37,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Firebase dependencias
-    implementation 'com.google.firebase:firebase-core:17.2.0'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.google.firebase:firebase-database:19.2.0'
-    implementation 'com.google.firebase:firebase-firestore:21.2.0'
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
@@ -63,6 +63,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
+
+
+
+
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
