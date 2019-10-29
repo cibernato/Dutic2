@@ -1,4 +1,4 @@
-package com.example.dutic2.ui.send
+package com.example.dutic2.ui.mensajes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dutic2.R
 
-class SendFragment : Fragment() {
+class MensajesFragment : Fragment() {
 
-    private lateinit var sendViewModel: SendViewModel
+    private lateinit var mensajesViewModel: MensajesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sendViewModel =
-            ViewModelProviders.of(this).get(SendViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
-        val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        mensajesViewModel =
+            ViewModelProviders.of(this).get(MensajesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_mensajes, container, false)
+        val textView: TextView = root.findViewById(R.id.text_tools)
+        mensajesViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

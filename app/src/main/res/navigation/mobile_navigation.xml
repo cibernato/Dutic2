@@ -7,53 +7,61 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.dutic2.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        android:name="com.example.dutic2.ui.cursos.CursosFragment"
+        android:label="@string/menu_cursos"
+        tools:layout="@layout/fragment_cursos">
         <action
             android:id="@+id/action_nav_home_to_nav_gallery"
-            app:destination="@id/nav_gallery" />
+            app:destination="@id/nav_tareas" />
         <action
             android:id="@+id/action_nav_home_to_nav_share"
-            app:destination="@id/nav_share" />
+            app:destination="@id/nav_configuraciones" />
         <action
             android:id="@+id/action_nav_home_to_nav_tools"
-            app:destination="@id/nav_tools" />
+            app:destination="@id/nav_mensajes" />
         <action
             android:id="@+id/action_nav_home_to_nav_slideshow"
-            app:destination="@id/nav_slideshow" />
+            app:destination="@id/nav_promedio" />
         <action
             android:id="@+id/action_nav_home_to_nav_send"
-            app:destination="@id/nav_send" />
+            app:destination="@id/nav_notas_de_voz" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_archivos"
+            app:destination="@id/nav_archivos" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.dutic2.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_tareas"
+        android:name="com.example.dutic2.ui.tareas.TareasFragment"
+        android:label="@string/menu_tareas"
+        tools:layout="@layout/fragment_tareas" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.dutic2.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_promedio"
+        android:name="com.example.dutic2.ui.promedio.PromediosFragment"
+        android:label="@string/menu_promedios"
+        tools:layout="@layout/fragment_promedio" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.dutic2.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_mensajes"
+        android:name="com.example.dutic2.ui.mensajes.MensajesFragment"
+        android:label="@string/menu_mensajes"
+        tools:layout="@layout/fragment_mensajes" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.example.dutic2.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/nav_configuraciones"
+        android:name="com.example.dutic2.ui.configuraciones.ConfiguracionesFragment"
+        android:label="@string/menu_configuraciones"
+        tools:layout="@layout/fragment_configuraciones" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.example.dutic2.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_notas_de_voz"
+        android:name="com.example.dutic2.ui.notasDeVoz.NotasDeVozFragment"
+        android:label="@string/menu_notas_de_voz"
+        tools:layout="@layout/fragment_notas_de_voz" />
+    <fragment
+        android:id="@+id/nav_archivos"
+        android:name="com.example.dutic2.ui.archivos.ArchivosFragment"
+        android:label="@string/menu_archivos"
+        tools:layout="@layout/archivos_fragment" />
 </navigation>

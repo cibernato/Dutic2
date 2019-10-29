@@ -1,13 +1,13 @@
-package com.example.dutic2.ui.send
+package com.example.dutic2.ui.promedio
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SendViewModel : ViewModel() {
+class PromediosViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is send Fragment"
+        value = "This is slideshow Fragment"
     }
     val text: LiveData<String> = _text
 }

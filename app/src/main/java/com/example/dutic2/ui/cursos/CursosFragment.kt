@@ -1,4 +1,4 @@
-package com.example.dutic2.ui.home
+package com.example.dutic2.ui.cursos
 
 import android.os.Bundle
 import android.util.Log
@@ -18,11 +18,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_cursos.*
 
-class HomeFragment : Fragment() {
+class CursosFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var cursosViewModel: CursosViewModel
     lateinit var cursoAdapter: CursosAdapter
 
 
@@ -53,15 +53,15 @@ class HomeFragment : Fragment() {
              }
 
          }*/
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        cursosViewModel =
+            ViewModelProviders.of(this).get(CursosViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_cursos, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
 //        cursoAdapter = CursosAdapter(context!!)
-//        homeViewModel.getCursos().observe(this, Observer<ArrayList<Curso>> {
+//        cursosViewModel.getCursos().observe(this, Observer<ArrayList<Curso>> {
 //            cursoAdapter.setCursos(it)
 //        })
-        homeViewModel.text.observe(this, Observer {
+        cursosViewModel.text.observe(this, Observer {
             //            textView.text = it
             textView.text = it
         })
@@ -109,7 +109,6 @@ class HomeFragment : Fragment() {
             nom.text = curso.nombre
             prof.text = curso.profesor
         }
-
-
     }
+
 }

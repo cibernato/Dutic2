@@ -1,4 +1,4 @@
-package com.example.dutic2.ui.slideshow
+package com.example.dutic2.ui.notasDeVoz
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dutic2.R
 
-class SlideshowFragment : Fragment() {
+class NotasDeVozFragment : Fragment() {
 
-    private lateinit var slideshowViewModel: SlideshowViewModel
+    private lateinit var notasDeVozViewModel: NotasDeVozViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-            ViewModelProviders.of(this).get(SlideshowViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(this, Observer {
+        notasDeVozViewModel =
+            ViewModelProviders.of(this).get(NotasDeVozViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_notas_de_voz, container, false)
+        val textView: TextView = root.findViewById(R.id.text_send)
+        notasDeVozViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

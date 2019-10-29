@@ -1,13 +1,13 @@
-package com.example.dutic2.ui.share
+package com.example.dutic2.ui.tareas
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class TareasViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is share Fragment"
+        value = "This is tareas Fragment"
     }
     val text: LiveData<String> = _text
 }

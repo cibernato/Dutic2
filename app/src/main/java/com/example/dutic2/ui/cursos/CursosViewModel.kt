@@ -1,13 +1,12 @@
-package com.example.dutic2.ui.home
+package com.example.dutic2.ui.cursos
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dutic2.models.Curso
 import kotlin.random.Random
 
-class HomeViewModel : ViewModel() {
+class CursosViewModel : ViewModel() {
 
     private val random = Random(20)
 
