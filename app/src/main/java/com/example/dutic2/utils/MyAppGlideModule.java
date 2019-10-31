@@ -1,4 +1,4 @@
-package com.example.dutic2;
+package com.example.dutic2.utils;
 
 import android.content.Context;
 

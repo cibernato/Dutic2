@@ -79,5 +79,9 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
+    //Epoxy
+    implementation 'com.airbnb.android:epoxy:3.7.0'
+    kapt 'com.airbnb.android:epoxy-processor:3.7.0'
 }
 apply plugin: 'com.google.gms.google-services'
