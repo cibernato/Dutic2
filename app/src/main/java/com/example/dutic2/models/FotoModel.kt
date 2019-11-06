@@ -17,23 +17,27 @@ import com.google.firebase.storage.StorageReference
 abstract class FotoModel : EpoxyModelWithHolder<FotoModel.FotoHolder>() {
 
     @EpoxyAttribute
-    var id: Long = 0
-
+    lateinit var listener : View.OnClickListener
     @EpoxyAttribute
     lateinit var imageRes: StorageReference
 
 
     override fun bind(holder: FotoHolder) {
-        GlideApp.with(holder.imageView).load(imageRes).into(holder.imageView)
+
+        GlideApp.with(holder.itemView).load(imageRes).into(holder.imageView)
     }
 
     inner class FotoHolder : EpoxyHolder() {
 
         lateinit var imageView: ImageView
+        lateinit var itemView: View
 
         override fun bindView(itemView: View) {
             imageView = itemView.findViewById(R.id.list_item_foto)
-
+            this.itemView = itemView
+            itemView.setOnClickListener {
+                listener.onClick(itemView)
+            }
         }
 
     }
