@@ -14,4 +14,10 @@
     <string name="menu_configuraciones">Configuraciones</string>
     <string name="menu_notas_de_voz">Notas de Voz</string>
     <string name="menu_archivos">Archivos</string>
+    <string name="tienes_dos_tareas_pendientes">Tienes %1$d tareas pendientes</string>
+    <string name="hola">Hola, %s</string>
+    <string name="curso_nombre">Curso : %s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

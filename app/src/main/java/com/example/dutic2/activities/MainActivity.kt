@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Environment
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
@@ -15,6 +16,7 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -31,6 +33,8 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jakewharton.threetenabp.AndroidThreeTen
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -60,7 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         checkSharedPreferences()
         registerUserInFirestore()
-
+        AndroidThreeTen.init(this)
         mFirebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
         checkPermisos()
@@ -87,7 +91,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.nav_configuraciones,
                 R.id.nav_notas_de_voz,
                 R.id.nav_archivos,
-                R.id.cerrar_sesion
+                R.id.cerrar_sesion,
+                R.id.nav_cursoDetallesFragment,
+                R.id.nav_cursoFotos,
+                R.id.nav_temas
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -240,15 +247,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun prueba(view: View) {
-        Log.e(
-            "OnClick",
-            " SharedPrefrences: ${sharedPreferences.getBoolean(
-                user?.uid,
-                true
-            )}, registered =: $registered"
-        )
-    }
+
 
 
     /* private fun selectFirstItemAsDefault() {

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.EpoxyRecyclerView
-
 import com.example.dutic2.R
 import com.example.dutic2.models.FotoModel
 import com.example.dutic2.utils.FotoController
@@ -46,24 +45,17 @@ class ArchivosFragment : Fragment()  {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val recyclerView = fotos_recycler_view as EpoxyRecyclerView
-        val references = arrayListOf<StorageReference>()
-        anadir_foto.setOnClickListener {
-            Log.e("EpoxyRecyclerVie"," ${recyclerView.adapter.toString()}, ${recyclerView.adapter?.itemCount}")
-        }
-        references.add(FirebaseStorage.getInstance().reference.child("default.jpg") )
-        references.add(FirebaseStorage.getInstance().reference.child("default.jpg") )
-//        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
-        recyclerView.layoutManager = GridLayoutManager(context,3)
-        archivosController = FotoController(references)
-        recyclerView.setControllerAndBuildModels(archivosController)
-//        recyclerView.withModels {
-//            this.apply {
-//                references.forEach {
-//                    FotoModel_().imageRes = it
-//                }
-//            }
+//        val recyclerView = fotos_recycler_view as EpoxyRecyclerView
+//        val references = arrayListOf<StorageReference>()
+//        anadir_foto.setOnClickListener {
+//            Log.e("EpoxyRecyclerVie"," ${recyclerView.adapter.toString()}, ${recyclerView.adapter?.itemCount}")
 //        }
+//        references.add(FirebaseStorage.getInstance().reference.child("default.jpg") )
+//        references.add(FirebaseStorage.getInstance().reference.child("default.jpg") )
+////        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+//        recyclerView.layoutManager = GridLayoutManager(context,3)
+//        archivosController = FotoController(references)
+//        recyclerView.setControllerAndBuildModels(archivosController)
 
 
         super.onViewCreated(view, savedInstanceState)

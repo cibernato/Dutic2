@@ -67,7 +67,6 @@ class LoginActivity : AppCompatActivity() {
 
         if (requestCode == 699) {
             if (resultCode == Activity.RESULT_OK) {
-                progress_login.visibility = View.GONE
                 // Successfully signed in
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -38,7 +38,7 @@
             />
         <item
             android:id="@+id/calendario_nav_bar"
-            android:icon="@mipmap/icon_calendar"
+            android:icon="@drawable/ic_calendario"
             android:title="Calendario"
             />
     </group>
