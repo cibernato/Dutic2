@@ -11,20 +11,22 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_stop_icon"
+
+        android:src="@drawable/ic_stop_selector"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/notas_voz_rec_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notas_voz_tiempo_total"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintTop_toBottomOf="@+id/cronometro"
+        app:layout_constraintVertical_bias="0.92"
+        />
 
     <ImageButton
         android:id="@+id/notas_voz_pause_button"
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_pause_icon"
+        android:src="@drawable/ic_pause_icon_selector"
         app:layout_constraintBottom_toBottomOf="@+id/notas_voz_stop_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -36,7 +38,7 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_rec_icon"
+        android:src="@drawable/ic_rec_icon_selector"
         app:layout_constraintBottom_toBottomOf="@+id/notas_voz_stop_button"
         app:layout_constraintEnd_toStartOf="@+id/notas_voz_pause_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -53,12 +55,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-    <TextView
-        android:id="@+id/notas_voz_tiempo_total"
+    <Chronometer
+        android:id="@+id/cronometro"
         style="@style/TextAppearance.MaterialComponents.Headline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00:00"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,5 +81,5 @@
         app:layout_constraintBottom_toTopOf="@+id/notas_voz_rec_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notas_voz_tiempo_total" />
+        app:layout_constraintTop_toBottomOf="@+id/cronometro" />
 </androidx.constraintlayout.widget.ConstraintLayout>

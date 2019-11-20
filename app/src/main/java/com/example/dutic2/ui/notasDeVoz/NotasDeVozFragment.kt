@@ -7,6 +7,7 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Environment
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +20,16 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.dutic2.R
 import kotlinx.android.synthetic.main.fragment_notas_de_voz.*
 import java.io.IOException
+import kotlin.properties.Delegates
 
 
 class NotasDeVozFragment : Fragment() {
 
+
+    var running = false
+    var pauseOffSet =0
     private lateinit var notasDeVozViewModel: NotasDeVozViewModel
-    lateinit var mRecorder :MediaRecorder
+    var mRecorder: MediaRecorder? = null
 
     var mPlayer = MediaPlayer()
     private val LOG_TAG = "AudioRecording"
@@ -45,43 +50,25 @@ class NotasDeVozFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         notas_voz_stop_button.isEnabled= false
         notas_voz_pause_button.isEnabled= false
-        mFileName = Environment.getExternalStorageDirectory().absolutePath
-        mFileName += "/AudioRecording.3gp"
+        mFileName = Environment.getExternalStorageDirectory().absolutePath+ "/AudioRecording.mp3"
 
         notas_voz_rec_button.setOnClickListener {
-            if(checkPermissions()){
-                notas_voz_pause_button.isEnabled=true
-                notas_voz_stop_button.isEnabled= true
-
-                mRecorder = MediaRecorder().apply {
-                    setAudioSource(MediaRecorder.AudioSource.MIC)
-                    setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                    setOutputFile(mFileName)
-                    setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-
-                    try {
-                        prepare()
-                    } catch (e: Exception) {
-                        Log.e(LOG_TAG, "prepare() failed")
-                        e.printStackTrace()
-                    }
-
-                    start()
-                }
-
-                Toast.makeText(context, "Recording Started", Toast.LENGTH_LONG)
-                    .show()
-            }else{
-                requestPermissions()
+            empezarGrabacion()
+            if( !running){
+                cronometro.base = SystemClock.elapsedRealtime() - pauseOffSet
+                cronometro.start()
+                running= true
             }
         }
         notas_voz_stop_button.setOnClickListener {
-            notas_voz_stop_button.isEnabled= false
-            notas_voz_pause_button.isEnabled= false
-            mRecorder.stop()
-            mRecorder.release()
-            mRecorder = MediaRecorder()
-            Toast.makeText(context, "Recording Stopped", Toast.LENGTH_LONG).show()
+           detenerGrabacion()
+            if (running){
+                cronometro.stop()
+                cronometro.base = SystemClock.elapsedRealtime()
+//                pauseOffSet = SystemClock.elapsedRealtime() - cronometro.base
+                running=false
+            }
+
         }
         play_button.setOnClickListener {
 
@@ -101,6 +88,43 @@ class NotasDeVozFragment : Fragment() {
 
         }
 
+    }
+
+    private fun detenerGrabacion() {
+        try{
+            notas_voz_stop_button.isEnabled= false
+            notas_voz_pause_button.isEnabled= false
+            mRecorder?.stop()
+            mRecorder?.release()
+            mRecorder = MediaRecorder()
+            Toast.makeText(context, "Recording Stopped", Toast.LENGTH_LONG).show()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun empezarGrabacion() {
+        if(checkPermissions()){
+            notas_voz_pause_button.isEnabled=false
+            notas_voz_stop_button.isEnabled= true
+            mRecorder = MediaRecorder().apply {
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+                setOutputFile(mFileName)
+                try {
+                    prepare()
+                    start()
+                } catch (e: Exception) {
+                    Log.e(LOG_TAG, "prepare() failed")
+                    e.printStackTrace()
+                }
+            }
+            Toast.makeText(context, "Recording Started", Toast.LENGTH_LONG)
+                .show()
+        }else{
+            requestPermissions()
+        }
     }
 
     private fun checkPermissions(): Boolean {
