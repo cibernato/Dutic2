@@ -144,7 +144,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
             val i = Intent(context, ViewPagerDetalleFotosActivity::class.java).apply {
                 putExtra("paths", fotos)
                 putExtra("pos", position)
-                putExtra("curso",curso)
+                putExtra("curso", curso)
             }
             startActivityForResult(i, 21)
         } catch (e: java.lang.Exception) {
@@ -204,12 +204,17 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
         if (requestCode == 996 && resultCode == Activity.RESULT_OK) {
             continueAcrossRestarts()
             fotos.clear()
-            llenarFotos()
+            viewModel.viewModelScope.launch {
+                llenarFotos()
+            }
+
         }
         if (requestCode == 21) {
             if (resultCode == Activity.RESULT_OK) {
                 fotos.clear()
-                llenarFotos()
+                viewModel.viewModelScope.launch {
+                    llenarFotos()
+                }
 //                fotos.clear()
 //                llenarFotos()
 //                imgController.requestModelBuild()
