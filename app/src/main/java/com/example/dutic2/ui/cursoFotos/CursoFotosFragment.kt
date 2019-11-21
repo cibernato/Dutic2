@@ -141,6 +141,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
 
     override fun onClickEpoxyModel(model: FotoModel_, position: Int) {
         try {
+
             val i = Intent(context, ViewPagerDetalleFotosActivity::class.java).apply {
                 putExtra("paths", fotos)
                 putExtra("pos", position)
@@ -196,6 +197,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
         } catch (e: IOException) {
             Log.d("my log", "Excep: $e")
         }
+        Log.d("my log", "${image?.absolutePath}")
         return image!!
     }
 

@@ -83,29 +83,29 @@
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/curso_detalles_tareas"
+        app:layout_constraintTop_toBottomOf="@+id/curso_detalles_notas_de_voz"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/curso_detalles_temas"
+        android:id="@+id/curso_detalles_publicaciones"
         android:layout_width="136dp"
         android:layout_height="106dp"
         android:background="@drawable/btn_curso_tema"
-        android:text="Temas"
+        android:text="Publicaciones"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/curso_detalles_tareas"
+        app:layout_constraintBottom_toBottomOf="@+id/curso_detalles_notas_de_voz"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/curso_detalles_tareas"
+        app:layout_constraintTop_toTopOf="@+id/curso_detalles_notas_de_voz"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/curso_detalles_tareas"
+        android:id="@+id/curso_detalles_notas_de_voz"
         android:layout_width="136dp"
         android:layout_height="106dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/btn_curso_tareas"
-        android:text="Tareas"
+        android:text="Notas de Voz"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"

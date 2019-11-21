@@ -70,10 +70,11 @@ class CursoDetallesFragment : Fragment() {
             }
 
         }
-        curso_detalles_tareas.setOnClickListener {
-            findNavController().navigate(R.id.nav_tareas)
+        curso_detalles_notas_de_voz.setOnClickListener {
+            val args =bundleOf("curso" to curso)
+            findNavController().navigate(R.id.nav_notas_de_voz,args)
         }
-        curso_detalles_temas.setOnClickListener {
+        curso_detalles_publicaciones.setOnClickListener {
             findNavController().navigate(R.id.nav_temas)
         }
 

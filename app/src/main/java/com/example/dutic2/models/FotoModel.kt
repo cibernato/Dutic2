@@ -1,16 +1,13 @@
 package com.example.dutic2.models
 
-import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
-import com.bumptech.glide.Glide
 import com.example.dutic2.R
 import com.example.dutic2.utils.GlideApp
-import com.google.firebase.storage.StorageReference
 import java.io.File
 
 @EpoxyModelClass(layout = R.layout.foto_model)
