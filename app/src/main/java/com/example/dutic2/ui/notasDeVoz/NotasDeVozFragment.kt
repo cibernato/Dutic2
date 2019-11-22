@@ -87,23 +87,6 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
         notas_voz_stop_button.setOnClickListener {
             detenerGrabacion()
         }
-//        play_button.setOnClickListener {
-//
-//            mPlayer = MediaPlayer()
-//            try {
-//                mPlayer.setDataSource(mFileName)
-//                mPlayer.prepare()
-//                mPlayer.start()
-//                Toast.makeText(
-//                    context,
-//                    "Recording Started Playing",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            } catch (e: Exception) {
-//                Log.e(LOG_TAG, "prepare() failed")
-//            }
-//
-//        }
     }
 
     private fun crearCarpeta() {
@@ -202,15 +185,6 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
             } catch (e: Exception) {
             }
         mdr.release()
-        grabaciones.sortWith(Comparator { o1, o2 ->
-            val a = File(o1.path!!)
-            val b = File(o2.path!!)
-            when {
-                a.lastModified() > b.lastModified() -> -1
-                a.lastModified() < b.lastModified() -> +1
-                else -> 0
-            }
-        })
         gController.requestModelBuild()
     }
 
@@ -232,19 +206,11 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
 
     override fun onPlayPauseClick(model: GrabacionModel_, position: Int, clickedView: View) {
         val image = (clickedView as ImageButton)
-        val pauseDrawable = resources.getDrawable(R.drawable.ic_pause_icon)
-
-        if (image.drawable.current.constantState!!.equals(pauseDrawable.constantState)) {
-            if (mPlayer.isPlaying) {
-                mPlayer.pause()
-                image.setImageDrawable(resources.getDrawable(R.drawable.ic_play_icon))
-            }else{
-                image.setImageDrawable(resources.getDrawable(R.drawable.ic_play_icon))
-            }
+        if (mPlayer.isPlaying) {
+            mPlayer.pause()
         } else {
             if (mPlayer.currentPosition != 0) {
                 mPlayer.start()
-                image.setImageDrawable(resources.getDrawable(R.drawable.ic_pause_icon))
             } else {
                 try {
                     mPlayer = MediaPlayer()
@@ -252,13 +218,20 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
                     mPlayer.prepare()
                     mPlayer.start()
                     image.setImageDrawable(resources.getDrawable(R.drawable.ic_pause_icon))
+                    mPlayer.setOnCompletionListener {
+                        it.release()
+                        reiniciarMediaPlayer()
+                        image.setImageDrawable(resources.getDrawable(R.drawable.ic_play_icon))
+                    }
                 } catch (e: Exception) {
                     Log.e(LOG_TAG, "prepare() failed")
                 }
             }
-
         }
+    }
 
+    private fun reiniciarMediaPlayer() {
+        mPlayer = MediaPlayer()
     }
 
     override fun onOpcionesClick(model: GrabacionModel_, position: Int) {

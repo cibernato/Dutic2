@@ -3,6 +3,8 @@ package com.example.dutic2.ui.cursoFotos
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -53,6 +56,8 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
     var storageReference = FirebaseStorage.getInstance()
     lateinit var photoURI: Uri
     private var saved: Boolean = false
+    lateinit var mNotifiManager :NotificationManager
+    lateinit var mBuilder : NotificationCompat.Builder
 
     companion object {
         private val EXTENSIONS = arrayOf("jpg")
@@ -64,8 +69,6 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
             }
             false
         }
-
-        fun newInstance() = CursoFotosFragment()
     }
 
     override fun onCreateView(
@@ -169,8 +172,6 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
             } catch (ex: IOException) {
                 ex.printStackTrace()
             }
-
-
             if (photoFile != null) {
                 pathToFile = photoFile.absolutePath
                 photoURI = FileProvider.getUriForFile(
@@ -225,10 +226,12 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
     }
 
     private fun continueAcrossRestarts() {
-
         var sessionUri: Uri? = null
         var uploadTask: UploadTask
 
+        mNotifiManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        mBuilder = NotificationCompat.Builder(context!! ,"1")
+        mBuilder.setContentTitle("Subiendo Foto").setContentText("Subida en Progreso").setSmallIcon(R.drawable.ic_play_icon)
         // [START save_before_restart]
         uploadTask =
             storageReference.getReference("/${user?.uid}/${curso.uid}/${photoURI.lastPathSegment!!}/")
@@ -241,7 +244,13 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
                 // Save this to persistent storage in case the process dies.
             }
             val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
+            mBuilder.setProgress(100,progress.toInt(),false)
+            mNotifiManager.notify(1,mBuilder.build())
             Log.e("Porcentaje ", "Upload is $progress% done")
+        }.addOnCompleteListener {
+            mBuilder.setContentText("Subida finalizada").setProgress(0,0,false)
+            mNotifiManager.notify(1,mBuilder.build())
+
         }
         uploadTask = storageReference.reference.putFile(
             photoURI,

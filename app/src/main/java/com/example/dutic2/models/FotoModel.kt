@@ -31,6 +31,7 @@ abstract class FotoModel : EpoxyModelWithHolder<FotoModel.FotoHolder>() {
 
         override fun bindView(itemView: View) {
             imageView = itemView.findViewById(R.id.list_item_foto)
+            imageView.layoutParams.height
             this.itemView = itemView
             itemView.setOnClickListener {
                 listener.onClick(itemView)
