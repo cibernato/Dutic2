@@ -102,8 +102,12 @@
             app:argType="com.example.dutic2.models.Curso" />
     </fragment>
     <fragment
-        android:id="@+id/nav_temas"
-        android:name="com.example.dutic2.ui.temas.TemasFragment"
+        android:id="@+id/nav_publicaciones"
+        android:name="com.example.dutic2.ui.publicaciones.PublicacionesFragment"
         android:label=""
-        tools:layout="@layout/fragment_temas"/>
+        tools:layout="@layout/fragment_publicaciones">
+        <argument
+            android:name="curso"
+            app:argType="com.example.dutic2.models.Curso" />
+    </fragment>
 </navigation>

@@ -75,7 +75,8 @@ class CursoDetallesFragment : Fragment() {
             findNavController().navigate(R.id.nav_notas_de_voz,args)
         }
         curso_detalles_publicaciones.setOnClickListener {
-            findNavController().navigate(R.id.nav_temas)
+            val args = bundleOf("curso" to curso)
+            findNavController().navigate(R.id.nav_publicaciones,args)
         }
 
     }

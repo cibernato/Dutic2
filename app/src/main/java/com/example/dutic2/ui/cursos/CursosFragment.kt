@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dutic2.R
-import com.example.dutic2.adapters.CursosAdapter
 import com.example.dutic2.models.Curso
 import com.example.dutic2.models.CursoViewHolder
 import com.example.dutic2.utils.GlideApp
@@ -39,38 +38,6 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /* FirebaseAuth.AuthStateListener {
-             val user = it.currentUser
-             if (user != null) {
-                 Toast.makeText(context, "logged in", Toast.LENGTH_SHORT).show()
-             } else {
-                 val providers = arrayListOf(
-                     AuthUI.IdpConfig.EmailBuilder().build(),
-                     AuthUI.IdpConfig.GoogleBuilder().build()
-                 )
-                 startActivityForResult(
-                     AuthUI.getInstance()
-                         .createSignInIntentBuilder()
-                         .setAvailableProviders(providers)
-                         .setTheme(R.style.LoginTheme)
-                         .setLogo(R.mipmap.logo)
-                         .setIsSmartLockEnabled(false)
-                         .build(),
-                     589
-                 )
-             }
-
-         }
-         val textView: TextView = root.findViewById(R.id.text_home)
-        cursoAdapter = CursosAdapter(context!!)
-        cursosViewModel.getCursos().observe(this, Observer<ArrayList<Curso>> {
-            cursoAdapter.setCursos(it)
-        })
-        cursosViewModel.text.observe(this, Observer {
-            //            textView.text = it
-            textView.text = it
-        })
-         */
         return inflater.inflate(R.layout.fragment_cursos, container, false)
     }
 

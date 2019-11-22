@@ -6,5 +6,8 @@ class Curso(
     var uid: String? = null,
     var nombre: String? = null,
     var profesor: String? = null,
-    var tareasPendientes: String? = "0"
+    var tareasPendientes: String? = "0",
+    var idGeneral :String? = null,
+    var tareasTotales : String? = null,
+    var tareasEntregadasNumero : String? = null
 ) : Serializable

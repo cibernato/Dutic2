@@ -34,28 +34,30 @@ class CursosViewModel : ViewModel() {
         return _fra
     }
 
-    private val _fra by lazy { MutableLiveData<FirestoreRecyclerAdapter<Curso, CursoViewHolder>>().apply {
-        Log.e("VECES CONSULTANDO", "CONSUTLKADNO A FIREBASE FIRESTORE AVER ")
-        value = object : FirestoreRecyclerAdapter<Curso, CursoViewHolder>(option) {
+    private val _fra by lazy {
+        MutableLiveData<FirestoreRecyclerAdapter<Curso, CursoViewHolder>>().apply {
+            Log.e("VECES CONSULTANDO", "CONSUTLKADNO A FIREBASE FIRESTORE AVER ")
+            value = object : FirestoreRecyclerAdapter<Curso, CursoViewHolder>(option) {
 
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CursoViewHolder {
-                val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.curso_list_item, parent, false)
-                return CursoViewHolder(itemView)
-            }
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CursoViewHolder {
+                    val itemView = LayoutInflater.from(parent.context)
+                        .inflate(R.layout.curso_list_item, parent, false)
+                    return CursoViewHolder(itemView)
+                }
 
-            override fun onBindViewHolder(
-                holder: CursoViewHolder,
-                position: Int,
-                model: Curso
-            ) {
-                holder.bind(model, text, mCursoClickListener)
-            }
+                override fun onBindViewHolder(
+                    holder: CursoViewHolder,
+                    position: Int,
+                    model: Curso
+                ) {
+                    holder.bind(model, text, mCursoClickListener)
+                }
 
-            override fun onError(e: FirebaseFirestoreException) {
-                Log.e("Firestore Adapter", "$e")
-                super.onError(e)
+                override fun onError(e: FirebaseFirestoreException) {
+                    Log.e("Firestore Adapter", "$e")
+                    super.onError(e)
+                }
             }
         }
-    } }
+    }
 }

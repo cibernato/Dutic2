@@ -70,6 +70,7 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!checkPermissions()) requestPermissions()
         notas_voz_stop_button.isEnabled = false
         notas_voz_pause_button.isEnabled = false
         crearCarpeta()
@@ -169,10 +170,10 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
         grabaciones.clear()
         duraciones.clear()
         val mdr = MediaMetadataRetriever()
-        val f = pathCarpeta
-        val files = f.listFiles(IMAGE_FILTER)
-        for (inFile in files)
-            try {
+        try {
+            val f = pathCarpeta
+            val files = f.listFiles(IMAGE_FILTER)
+            for (inFile in files) {
                 if (inFile.length() != 0L) {
                     mdr.setDataSource(inFile.absolutePath)
                     val duration = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
@@ -182,8 +183,10 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
                 } else {
                     inFile.delete()
                 }
-            } catch (e: Exception) {
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         mdr.release()
         gController.requestModelBuild()
     }

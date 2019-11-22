@@ -160,6 +160,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="nav_publicaciones">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-837" />
+                            <option name="y" value="-451" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="nav_tareas">
                     <value>
                       <LayoutPositions>
@@ -167,18 +179,6 @@
                           <Point>
                             <option name="x" value="-42" />
                             <option name="y" value="474" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="nav_temas">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-837" />
-                            <option name="y" value="-451" />
                           </Point>
                         </option>
                       </LayoutPositions>

@@ -11,7 +11,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEMAS"
+        android:text="Publicaciones"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:textStyle="bold|italic"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@+id/publicaciones_tab_layout"
         app:layout_constraintVertical_bias="0.0" />
 
     <View
@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/publicaciones_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FCEEE8E8"
@@ -75,29 +75,27 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1er parcial" />
+            android:icon="@drawable/ic_novedades_icon"
+            android:text="Novedades" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2er parcial" />
+            android:icon="@drawable/ic_list_tareas_icon"
+            android:text="Tareas" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3er parcial" />
+
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/publicaciones_view_pager"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view4"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/curso_list_item" />
+        app:layout_constraintTop_toTopOf="@+id/view4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

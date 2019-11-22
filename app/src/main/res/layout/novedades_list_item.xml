@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:background="@drawable/round_corners"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/tipo_publicacion_icon"
+        android:layout_width="38dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_tema_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titulo_publicacion"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="ahdfasdfiohsaodifh aposdhfpoiahsdoifhaoish ahsdfoihuasidofo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tipo_publicacion_icon"
+        app:layout_constraintTop_toTopOf="@+id/tipo_publicacion_icon"
+        tools:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/fecha_publicacion"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextVie"
+        app:layout_constraintBottom_toBottomOf="@+id/tipo_publicacion_icon"
+        app:layout_constraintStart_toEndOf="@+id/tipo_publicacion_icon"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_publicacion"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/contenido_publicacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tipo_publicacion_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_publicacion_icon" />
+</androidx.constraintlayout.widget.ConstraintLayout>

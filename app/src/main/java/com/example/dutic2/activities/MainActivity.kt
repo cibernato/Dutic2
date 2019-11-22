@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.cerrar_sesion,
                 R.id.nav_cursoDetallesFragment,
                 R.id.nav_cursoFotos,
-                R.id.nav_temas
+                R.id.nav_publicaciones
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
