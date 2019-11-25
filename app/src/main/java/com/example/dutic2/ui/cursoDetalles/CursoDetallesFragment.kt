@@ -33,7 +33,7 @@ class CursoDetallesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        curso = arguments?.getSerializable("curso") as Curso
+        curso = arguments?.getParcelable<Curso>("curso") as Curso
         return inflater.inflate(R.layout.curso_detalles_fragment, container, false)
     }
 

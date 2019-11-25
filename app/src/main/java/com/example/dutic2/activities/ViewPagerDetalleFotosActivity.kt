@@ -30,13 +30,13 @@ class ViewPagerDetalleFotosActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
         }
-        var adapter = ViewPagerFotosAdpater(this,path)
+        val adapter = ViewPagerFotosAdpater(this,path)
         view_pager.adapter = adapter
         view_pager.currentItem = intent.getIntExtra("pos",0)
         foto_compartir.setOnClickListener {
             comparirFoto()
         }
-        var f = PruebaFragment()
+        val f = PruebaFragment()
         view_pager.setOnClickListener {
             if (supportFragmentManager.backStackEntryCount>=1){
                 super.onBackPressed()
@@ -84,7 +84,7 @@ class ViewPagerDetalleFotosActivity : AppCompatActivity() {
         try {
             val f = path[currentItem]
             f.delete()
-            val curso = intent.getSerializableExtra("curso") as Curso
+            val curso = intent.getParcelableExtra("curso") as Curso
             val user  = FirebaseAuth.getInstance().currentUser
             val uri= path[currentItem].toUri().lastPathSegment
             Log.e("Eliminacion", "/${user?.uid}/${curso.uid}/${uri}")

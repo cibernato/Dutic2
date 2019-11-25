@@ -18,10 +18,6 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_promedios" />
         <item
-            android:id="@+id/nav_mensajes"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_mensajes" />
-        <item
             android:id="@+id/nav_notas_de_voz"
             android:icon="@drawable/ic_settings_voice_black_24dp"
             android:title="@string/menu_notas_de_voz"
@@ -32,9 +28,9 @@
             android:title="@string/menu_archivos"
             />
         <item
-            android:id="@+id/camara_nav_bar"
+            android:id="@+id/nav_galeria"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Camara"
+            android:title="Galeria"
             />
         <item
             android:id="@+id/calendario_nav_bar"

@@ -1,6 +1,8 @@
 package com.example.dutic2.models
 
+import android.app.Activity
 import android.net.Uri
+import android.util.DisplayMetrics
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -40,6 +42,12 @@ abstract class GrabacionModel : EpoxyModelWithHolder<GrabacionModel.GrabacionHol
         lateinit var duracion: TextView
         lateinit var playIcon : ImageButton
         override fun bindView(itemView: View) {
+
+            val displaymetrics = DisplayMetrics()
+            (itemView.context as Activity).windowManager.defaultDisplay.getMetrics(displaymetrics)
+            val deviceheight: Int = displaymetrics.heightPixels / 8
+            itemView.layoutParams.height = deviceheight
+
             titulo = itemView.findViewById(R.id.nombre_nota_de_voz)
             duracion = itemView.findViewById(R.id.duracion_nota_de_voz)
             playIcon = itemView.findViewById(R.id.play_pause_icon)

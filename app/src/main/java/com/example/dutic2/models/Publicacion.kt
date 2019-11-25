@@ -9,7 +9,7 @@ class Publicacion(
     var fecha : String? = null ,
     var tieneAdjuntos : Boolean? = false,
     var contenido : String? = null,
-    var adjuntos : ArrayList<String>? = arrayListOf()
+    var adjuntos : List<String>? = listOf()
     ) : Serializable{
 
 }

@@ -43,7 +43,6 @@ import kotlin.Comparator
 class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListener,
     GrabacionesController.PlayPauseClickListener {
 
-    var isPlaying = false
     var running = false
     var pauseOffSet = 0
     private lateinit var notasDeVozViewModel: NotasDeVozViewModel
@@ -64,7 +63,7 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
     ): View? {
         notasDeVozViewModel =
             ViewModelProviders.of(this).get(NotasDeVozViewModel::class.java)
-        curso = arguments?.getSerializable("curso") as Curso
+        curso = arguments?.getParcelable<Curso>("curso") as Curso
         return inflater.inflate(R.layout.fragment_notas_de_voz, container, false)
     }
 
@@ -118,7 +117,6 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
             notasDeVozViewModel.viewModelScope.launch {
                 llenarGrabaciones()
             }
-            Toast.makeText(context, "Recording Stopped", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -146,8 +144,6 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
                     e.printStackTrace()
                 }
             }
-            Toast.makeText(context, "Recording Started", Toast.LENGTH_LONG)
-                .show()
         } else {
             requestPermissions()
         }

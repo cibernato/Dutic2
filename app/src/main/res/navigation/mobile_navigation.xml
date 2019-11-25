@@ -17,9 +17,6 @@
             android:id="@+id/action_nav_home_to_nav_share"
             app:destination="@id/nav_configuraciones" />
         <action
-            android:id="@+id/action_nav_home_to_nav_tools"
-            app:destination="@id/nav_mensajes" />
-        <action
             android:id="@+id/action_nav_home_to_nav_slideshow"
             app:destination="@id/nav_promedio" />
         <action
@@ -34,6 +31,9 @@
         <action
             android:id="@+id/action_nav_home_to_example3Fragment"
             app:destination="@id/nav_calendario2" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_plantilla"
+            app:destination="@id/nav_plantilla" />
     </fragment>
 
     <fragment
@@ -47,12 +47,6 @@
         android:name="com.example.dutic2.ui.promedio.PromediosFragment"
         android:label="@string/menu_promedios"
         tools:layout="@layout/fragment_promedio" />
-
-    <fragment
-        android:id="@+id/nav_mensajes"
-        android:name="com.example.dutic2.ui.mensajes.MensajesFragment"
-        android:label="@string/menu_mensajes"
-        tools:layout="@layout/fragment_mensajes" />
 
     <fragment
         android:id="@+id/nav_configuraciones"
@@ -82,6 +76,15 @@
         <argument
             android:name="curso"
             app:argType="com.example.dutic2.models.Curso" />
+        <action
+            android:id="@+id/action_nav_cursoDetallesFragment_to_nav_publicaciones"
+            app:destination="@id/nav_publicaciones" />
+        <action
+            android:id="@+id/action_nav_cursoDetallesFragment_to_nav_cursoFotos"
+            app:destination="@id/nav_cursoFotos" />
+        <action
+            android:id="@+id/action_nav_cursoDetallesFragment_to_nav_calendario2"
+            app:destination="@id/nav_calendario2" />
     </fragment>
     <fragment
         android:id="@+id/nav_calendario2"
@@ -109,5 +112,29 @@
         <argument
             android:name="curso"
             app:argType="com.example.dutic2.models.Curso" />
+        <action
+            android:id="@+id/action_nav_publicaciones_to_detallePublicacionFragment"
+            app:destination="@id/nav_detallePublicacion" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_detallePublicacion"
+        android:name="com.example.dutic2.ui.publicaciones.DetallePublicacionFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_detalle_publicacion" >
+        <argument
+            android:name="publicacion"
+            app:argType="com.example.dutic2.models.Publicacion" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_plantilla"
+        android:name="com.example.dutic2.ui.plantillaCursos.PlantillaCursosFragment"
+        android:label=""
+        tools:layout="@layout/plantilla_cursos_fragment" >
+        <argument
+            android:name="cursos"
+            app:argType="com.example.dutic2.models.Curso[]" />
+        <argument
+            android:name="flag"
+            app:argType="string" />
     </fragment>
 </navigation>

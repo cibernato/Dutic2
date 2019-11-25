@@ -7,8 +7,12 @@ import com.example.dutic2.models.Curso
 import com.example.dutic2.ui.publicaciones.NovedadesFragment
 import com.example.dutic2.ui.publicaciones.TareasEntregadasFragment
 
-class ViewPagerPublicacionesAdapter(fm: FragmentManager,var curso :Curso) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ViewPagerPublicacionesAdapter(
+    fm: FragmentManager,
+    var curso: Curso
+
+) :
+    FragmentPagerAdapter(fm, BEHAVIOR_SET_USER_VISIBLE_HINT) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {

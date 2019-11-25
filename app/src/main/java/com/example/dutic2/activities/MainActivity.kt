@@ -6,17 +6,15 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.os.Bundle
-import android.os.Environment
-import android.os.PersistableBundle
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.*
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -27,6 +25,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
 import com.example.dutic2.R
+import com.example.dutic2.models.Curso
+import com.example.dutic2.ui.cursos.CursosFragment
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
@@ -34,11 +34,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    CursosFragment.CursosFragmentListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mFirebaseAuth: FirebaseAuth
@@ -55,15 +55,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
     private var registered = false
     private lateinit var mAuthStateListener: FirebaseAuth.AuthStateListener
+    var cursos: Array<Curso>? = arrayOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("Oncreate MEthod", "SE ejecuta en cada camnbio de landscape a viewport")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         checkSharedPreferences()
-        registerUserInFirestore()
+//        registerUserInFirestore()
         AndroidThreeTen.init(this)
         mFirebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -87,14 +90,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.nav_home,
                 R.id.nav_tareas,
                 R.id.nav_promedio,
-                R.id.nav_mensajes,
                 R.id.nav_configuraciones,
                 R.id.nav_notas_de_voz,
                 R.id.nav_archivos,
                 R.id.cerrar_sesion,
                 R.id.nav_cursoDetallesFragment,
                 R.id.nav_cursoFotos,
-                R.id.nav_publicaciones
+                R.id.nav_publicaciones,
+                R.id.nav_plantilla
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -115,33 +118,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         registered = sharedPreferences.getBoolean(user?.uid, true)
     }
 
-    private fun registerUserInFirestore() {
-        if (registered) {
-            val c = Calendar.getInstance()
-            val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-            try {
-                FirebaseFirestore.getInstance().document("/usuarios/${user?.uid}")
-                    .set(hashMapOf("fechaCreated" to sdf.format(c.time)))
-                    .addOnFailureListener {
-                        Log.e("error", "$it, irrecuperable")
-                    }.addOnSuccessListener {
-                        editor = sharedPreferences.edit()
-                        registered = false
-                        editor.putBoolean(user?.uid, registered)
-                        editor.apply()
-                        Log.e("success", "$it, añadido a SharedPrefrences : $registered")
-
-                    }.addOnCompleteListener {
-                        Log.e("completed", "$it, completado de crear")
-                    }
-            } catch (e: Exception) {
-                Log.e("CreatingDocumentForUser", "$e")
-            }
-
-        } else {
-            Log.e("registerUserInFirestore", "Ya registrado no se requiere acciones")
-        }
-    }
+//    private fun registerUserInFirestore() {
+//        if (registered) {
+//            val c = Calendar.getInstance()
+//            val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+//            try {
+//                FirebaseFirestore.getInstance().document("/usuarios/${user?.uid}")
+//                    .set(hashMapOf("fechaCreated" to sdf.format(c.time)))
+//                    .addOnFailureListener {
+//                        Log.e("error", "$it, irrecuperable")
+//                    }.addOnSuccessListener {
+//                        editor = sharedPreferences.edit()
+//                        registered = false
+//                        editor.putBoolean(user?.uid, registered)
+//                        editor.apply()
+//                        Log.e("success", "$it, añadido a SharedPrefrences : $registered")
+//
+//                    }
+//            } catch (e: Exception) {
+//                Log.e("CreatingDocumentForUser", "$e")
+//            }
+//
+//        } else {
+//            Log.e("registerUserInFirestore", "Ya registrado no se requiere acciones")
+//        }
+//    }
 
     private fun checkPermisos() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -177,20 +178,47 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_promedio -> {
                 navController.navigate(R.id.nav_promedio)
             }
-            R.id.nav_mensajes -> {
-                navController.navigate(R.id.nav_mensajes)
-            }
             R.id.nav_configuraciones -> {
                 navController.navigate(R.id.nav_configuraciones)
             }
             R.id.nav_notas_de_voz -> {
-                navController.navigate(R.id.nav_notas_de_voz)
+                val args = Bundle()
+                try {
+                    args.apply {
+                        putParcelableArray("cursos", cursos)
+                        putString("flag", "voz")
+                    }
+                    navController.navigate(R.id.nav_plantilla, args)
+                } catch (e: java.lang.Exception) {
+                    Log.e("Error en try", "$e, values $cursos , args $args")
+                }
             }
             R.id.nav_archivos -> {
-                navController.navigate(R.id.nav_archivos)
+                val args = Bundle()
+                try {
+                    args.apply {
+                        putParcelableArray("cursos", cursos)
+                        putString("flag", "archivos")
+                    }
+                    navController.navigate(R.id.nav_plantilla, args)
+                } catch (e: java.lang.Exception) {
+                    Log.e("Error en try", "$e, values $cursos , args $args")
+                }
             }
             R.id.cerrar_sesion -> {
                 cerrarSesion()
+            }
+            R.id.nav_galeria -> {
+                val args = Bundle()
+                try {
+                    args.apply {
+                        putParcelableArray("cursos", cursos)
+                        putString("flag", "imagenes")
+                    }
+                    navController.navigate(R.id.nav_plantilla, args)
+                } catch (e: java.lang.Exception) {
+                    Log.e("Error en try", "$e, values $cursos , args $args")
+                }
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -219,6 +247,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        setColorBar(Color.WHITE)
         return true
     }
 
@@ -247,80 +276,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    fun setColorBar(color: Int) {
+        actionBar?.setBackgroundDrawable(ColorDrawable(color))
+    }
 
-
-
-    /* private fun selectFirstItemAsDefault() {
-
-     }
-
-     private fun setupDrawer() {
-         mDrawerToggle = object : ActionBarDrawerToggle(
-             this,
-             drawerLayout,
-             R.string.navigation_drawer_open,
-             R.string.navigation_drawer_close
-         ) {
-             override fun onDrawerOpened(drawerView: View) {
-                 super.onDrawerOpened(drawerView)
-                 supportActionBar?.title = resources.getString(R.string.app_name)
-                 invalidateOptionsMenu()
-             }
-
-             override fun onDrawerClosed(drawerView: View) {
-                 super.onDrawerClosed(drawerView)
-                 supportActionBar?.title = "Cerrado"
-                 invalidateOptionsMenu()
-             }
-         }
-         mDrawerToggle.isDrawerIndicatorEnabled = true
-         drawerLayout.setDrawerListener(mDrawerToggle)
-     }
-
-     private fun addDrawersItem() {
-         adapter = ExpandableListAdapter(this, titles, items)
-         expandableListView.setAdapter(adapter)
-         expandableListView.setOnGroupExpandListener {
-             supportActionBar?.title = titles[it]
-         }
-         expandableListView.setOnGroupCollapseListener {
-             supportActionBar?.title = resources.getString(R.string.app_name)
-         }
-         expandableListView.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
-             val sItem = items[childPosition]
-             Toast.makeText(this, sItem.toString(), Toast.LENGTH_SHORT).show()
-             drawerLayout.closeDrawer(GravityCompat.START)
-             return@setOnChildClickListener true
-         }
-
-     }
-
-     private fun setupDrawerContent(navView: NavigationView?) {
-         navView?.setNavigationItemSelectedListener {
-             it.isChecked = true
-             drawerLayout.closeDrawers()
-             return@setNavigationItemSelectedListener true
-         }
-
-     }
-
-     private fun genData() {
-
-         titles.add("elemento 1")
-         titles.add("elemento 2")
-         titles.add("elemento 3")
-         titles.add("elemento 4")
-         val ele1 = ArrayList<String>()
-         ele1.add("item 1")
-         ele1.add("item 2")
-         ele1.add("item 3")
-         val ele2 = ArrayList<String>()
-         ele2.add("item 4")
-         ele2.add("item 5")
-         ele2.add("item 6")
-         items.add(ele1)
-         items.add(ele2)
-     }*/
+    override fun sendToActivity(cursos: Array<Curso>) {
+        this.cursos = cursos
+    }
 
 
 }

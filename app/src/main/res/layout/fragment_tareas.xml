@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/publicaciones_nombre_curso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Curso 1: Negocios ElectrÃ³nicos"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/publicaciones_nombre_curso" />
 
     <View
         android:id="@+id/view3"

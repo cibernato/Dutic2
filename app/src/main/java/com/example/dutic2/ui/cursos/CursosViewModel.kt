@@ -11,25 +11,18 @@ import com.example.dutic2.models.Curso
 import com.example.dutic2.models.CursoViewHolder
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.firebase.ui.firestore.ObservableSnapshotArray
 import com.google.firebase.firestore.FirebaseFirestoreException
 
 class CursosViewModel : ViewModel() {
     lateinit var option: FirestoreRecyclerOptions<Curso>
     lateinit var text: String
     lateinit var mCursoClickListener: CursoViewHolder.CursoClickListener
+    lateinit var mItemsChangeNotifier: ItemsChangeNotifier
 
-    fun init(
-        text: String,
-        option: FirestoreRecyclerOptions<Curso>,
-        mCursoClickListener: CursoViewHolder.CursoClickListener
-    ) {
-        this.option = option
-        this.text = text
-        this.mCursoClickListener = mCursoClickListener
-
+    interface ItemsChangeNotifier{
+        fun notifyFragment()
     }
-
-
     fun getFRA(): LiveData<FirestoreRecyclerAdapter<Curso, CursoViewHolder>> {
         return _fra
     }
@@ -57,7 +50,13 @@ class CursosViewModel : ViewModel() {
                     Log.e("Firestore Adapter", "$e")
                     super.onError(e)
                 }
+
+                override fun onDataChanged() {
+                    super.onDataChanged()
+                    mItemsChangeNotifier.notifyFragment()
+                }
             }
         }
     }
+
 }

@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FilenameFilter
 import java.io.IOException
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -81,7 +83,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CursoFotosViewModel::class.java)
-        curso = arguments?.getSerializable("curso") as Curso
+        curso = arguments?.getParcelable<Curso>("curso") as Curso
         crearCarpeta()
         viewModel.viewModelScope.launch {
             llenarFotos()
@@ -148,7 +150,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
             val i = Intent(context, ViewPagerDetalleFotosActivity::class.java).apply {
                 putExtra("paths", fotos)
                 putExtra("pos", position)
-                putExtra("curso", curso)
+                putExtra("curso", curso as Parcelable)
             }
             startActivityForResult(i, 21)
         } catch (e: java.lang.Exception) {

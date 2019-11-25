@@ -32,5 +32,6 @@ class PublicacionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         itemView.setOnClickListener {
             mPublicacionClickListener.onPublicacionClicked(publicacion)
         }
+
     }
 }

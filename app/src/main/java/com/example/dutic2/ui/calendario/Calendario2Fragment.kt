@@ -151,7 +151,7 @@ class Calendario2Fragment : BaseFragment(), HasBackButton {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        curso = arguments?.getSerializable("curso") as Curso
+        curso = arguments?.getParcelable<Curso>("curso") as Curso
         return inflater.inflate(R.layout.calendario2_fragment, container, false)
     }
 

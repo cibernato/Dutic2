@@ -10,6 +10,7 @@ class CursoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var prof: TextView = itemView.findViewById(R.id.curso_profesor_list_item)
     var pendientes: TextView = itemView.findViewById(R.id.curso_list_item_pendientes)
 
+
     interface CursoClickListener {
         fun onCrsoClicked(curso: Curso)
     }
