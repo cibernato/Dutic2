@@ -26,6 +26,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.example.dutic2.R
+import com.example.dutic2.activities.SharedMainViewModel
 import com.example.dutic2.activities.ViewPagerDetalleFotosActivity
 import com.example.dutic2.models.Curso
 import com.example.dutic2.models.FotoModel_
@@ -50,7 +51,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
     private lateinit var pathToFile: String
     private val references = mutableListOf<String>()
     private var user = FirebaseAuth.getInstance().currentUser
-    private lateinit var viewModel: CursoFotosViewModel
+    private lateinit var viewModel: SharedMainViewModel
     lateinit var archivosController: FotoController
     private var prueba = arrayListOf<String>()
     private lateinit var curso: Curso
@@ -82,7 +83,9 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CursoFotosViewModel::class.java)
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
+        }
         curso = arguments?.getParcelable<Curso>("curso") as Curso
         crearCarpeta()
         viewModel.viewModelScope.launch {

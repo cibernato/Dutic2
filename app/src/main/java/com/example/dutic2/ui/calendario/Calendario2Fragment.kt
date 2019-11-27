@@ -363,8 +363,12 @@ class Calendario2Fragment : BaseFragment(), HasBackButton {
         Log.e("Map values", "Keys : ${events.keys}, values: ${events.values} y map : $events")
 
 
-        calendarioReferencia.set(hashMapOf("calendario" to gson.toJson(events,
-            object : TypeToken<MutableMap<LocalDate, List<Event>>>() {}.type)), SetOptions.merge())
+        calendarioReferencia.set(
+            hashMapOf("calendario" to gson.toJson(events,
+                object : TypeToken<MutableMap<LocalDate, List<Event>>>() {}.type
+            )
+            ), SetOptions.merge()
+        )
         super.onStop()
 
     }

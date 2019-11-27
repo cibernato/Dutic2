@@ -1,7 +1,5 @@
 package com.example.dutic2.ui.publicaciones
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,7 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 class NovedadesViewModel:ViewModel() {
     lateinit var cursoModel: Curso
     lateinit var option: FirestoreRecyclerOptions<Publicacion>
-    lateinit var text: String
     var isTarea = false
     lateinit var mPublicacionClickListener: PublicacionViewHolder.PublicacionClickListener
 

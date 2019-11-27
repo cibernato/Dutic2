@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -56,13 +57,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var registered = false
     private lateinit var mAuthStateListener: FirebaseAuth.AuthStateListener
     var cursos: Array<Curso>? = arrayOf()
-
+    var sharedMainViewModel :SharedMainViewModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("Oncreate MEthod", "SE ejecuta en cada camnbio de landscape a viewport")
+        Log.e("Oncreate MEthod", "SE ejecuta en cada camnbio de landscape a viewport")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        sharedMainViewModel = ViewModelProviders.of(this).get(SharedMainViewModel::class.java)
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         checkSharedPreferences()
@@ -97,7 +99,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.nav_cursoDetallesFragment,
                 R.id.nav_cursoFotos,
                 R.id.nav_publicaciones,
-                R.id.nav_plantilla
+                R.id.nav_plantilla,
+                R.id.nav_promediosGeneral
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -148,6 +151,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
+
             // Permission is not granted
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -175,8 +179,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_tareas -> {
                 navController.navigate(R.id.nav_tareas)
             }
-            R.id.nav_promedio -> {
-                navController.navigate(R.id.nav_promedio)
+            R.id.nav_promediosGeneral -> {
+                val args = Bundle()
+                try {
+                    args.apply {
+                        putParcelableArray("cursos", cursos)
+                        putString("flag", "voz")
+                    }
+                    navController.navigate(R.id.nav_promediosGeneral, args)
+                } catch (e: java.lang.Exception) {
+                    Log.e("Error en try", "$e, values $cursos , args $args")
+                }
             }
             R.id.nav_configuraciones -> {
                 navController.navigate(R.id.nav_configuraciones)

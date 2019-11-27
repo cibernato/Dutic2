@@ -46,7 +46,11 @@
         android:id="@+id/nav_promedio"
         android:name="com.example.dutic2.ui.promedio.PromediosFragment"
         android:label="@string/menu_promedios"
-        tools:layout="@layout/fragment_promedio" />
+        tools:layout="@layout/fragment_promedio" >
+        <argument
+            android:name="curso"
+            app:argType="com.example.dutic2.models.Curso" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_configuraciones"
@@ -136,5 +140,14 @@
         <argument
             android:name="flag"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_promediosGeneral"
+        android:name="com.example.dutic2.ui.promedio.PromediosGeneralFragment"
+        android:label=""
+        tools:layout="@layout/fragment_promedios_general" >
+        <argument
+            android:name="cursos"
+            app:argType="com.example.dutic2.models.Curso[]" />
     </fragment>
 </navigation>

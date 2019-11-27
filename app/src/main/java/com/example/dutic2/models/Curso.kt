@@ -13,7 +13,9 @@ data class Curso(
     var tareasPendientes: String? = "0",
     var idGeneral :String? = null,
     var tareasTotales : String? = null,
-    var tareasEntregadasNumero : String? = null
+    var tareasEntregadasNumero : String? = null,
+    var promedios : String? = "[]",
+    var promedioTotal : String? =null
 ) : Parcelable{
     override fun toString(): String {
         return "$uid, $nombre, $profesor, $tareasPendientes, $idGeneral, $tareasTotales, $tareasEntregadasNumero"
