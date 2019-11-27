@@ -27,7 +27,6 @@ class PromediosFragment : Fragment(), PromedioAdapter.PromedioClickListener {
     var lista_promedios: ArrayList<Promedio> = arrayListOf()
     private lateinit var curso: Curso
     private var gson = Gson()
-    private lateinit var promediosViewModel: PromediosViewModel
     var porcentajeAcumulado = 0
     var notaAcumulada = 0.0
     override fun onCreateView(
@@ -35,8 +34,6 @@ class PromediosFragment : Fragment(), PromedioAdapter.PromedioClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        promediosViewModel =
-            ViewModelProviders.of(this).get(PromediosViewModel::class.java)
         curso = arguments?.getParcelable<Curso>("curso") as Curso
         return inflater.inflate(R.layout.fragment_promedio, container, false)
     }

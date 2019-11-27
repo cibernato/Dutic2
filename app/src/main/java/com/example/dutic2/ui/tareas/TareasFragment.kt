@@ -11,15 +11,12 @@ import com.example.dutic2.R
 
 class TareasFragment : Fragment() {
 
-    private lateinit var tareasViewModel: TareasViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        tareasViewModel =
-            ViewModelProviders.of(this).get(TareasViewModel::class.java)
         return inflater.inflate(R.layout.fragment_tareas, container, false)
     }
 

@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.example.dutic2.R
+import com.example.dutic2.activities.SharedMainViewModel
 import com.example.dutic2.models.Curso
 import com.example.dutic2.models.GrabacionModel_
 import com.example.dutic2.utils.GrabacionesController
@@ -45,7 +46,7 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
 
     var running = false
     var pauseOffSet = 0
-    private lateinit var notasDeVozViewModel: NotasDeVozViewModel
+    private lateinit var notasDeVozViewModel: SharedMainViewModel
     var mRecorder: MediaRecorder? = null
     lateinit var curso: Curso
     private lateinit var pathCarpeta: File
@@ -61,8 +62,10 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notasDeVozViewModel =
-            ViewModelProviders.of(this).get(NotasDeVozViewModel::class.java)
+        activity?.let {
+            notasDeVozViewModel =
+                ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
+        }
         curso = arguments?.getParcelable<Curso>("curso") as Curso
         return inflater.inflate(R.layout.fragment_notas_de_voz, container, false)
     }

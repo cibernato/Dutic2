@@ -23,7 +23,6 @@ class PlantillaCursosFragment : Fragment(), PlantillaCursoAdapter.PlantillaClick
     lateinit var flag: String
     lateinit var adapter: PlantillaCursoAdapter
 
-    private lateinit var viewModel: PlantillaCursosViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +33,6 @@ class PlantillaCursosFragment : Fragment(), PlantillaCursoAdapter.PlantillaClick
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PlantillaCursosViewModel::class.java)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
