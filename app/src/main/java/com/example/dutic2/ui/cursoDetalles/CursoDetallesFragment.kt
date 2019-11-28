@@ -27,7 +27,6 @@ class CursoDetallesFragment : Fragment() {
         fun newInstance() = CursoDetallesFragment()
     }
 
-    private lateinit var viewModel: CursoDetallesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +39,7 @@ class CursoDetallesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inicializarVistas()
-        viewModel = ViewModelProviders.of(this).get(CursoDetallesViewModel::class.java)
+        //viewModel = ViewModelProviders.of(this).get(CursoDetallesViewModel::class.java)
 
     }
 

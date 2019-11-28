@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-Dutic2-Dutic 2.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-Dutic2-Dutic 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidStudioProjects-Dutic2-app.iml" filepath="$PROJECT_DIR$/app/AndroidStudioProjects-Dutic2-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/Dutic 2.iml" filepath="$PROJECT_DIR$/Dutic 2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Dutic2-Dutic 2.iml" filepath="$PROJECT_DIR$/Dutic2-Dutic 2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/Dutic2-app.iml" filepath="$PROJECT_DIR$/app/Dutic2-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lenovo-AndroidStudioProjects-Dutic2-Dutic 2.iml" filepath="$PROJECT_DIR$/Lenovo-AndroidStudioProjects-Dutic2-Dutic 2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
