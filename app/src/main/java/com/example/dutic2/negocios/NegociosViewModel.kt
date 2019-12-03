@@ -17,12 +17,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 
 class NegociosViewModel : ViewModel() {
 
-    private val ref_transaciones =
+    private val refTransaciones =
         FirebaseFirestore.getInstance().collection("/negocios/tablas/transacciones")
-    private val ref_trabajadores =
+            .orderBy("codigo")
+    private val refTrabajadores =
         FirebaseFirestore.getInstance().collection("/negocios/tablas/trabajadores")
-    private val ref_permisos =
-        FirebaseFirestore.getInstance().collection("/negocios/tablas/permisos")
+            .orderBy("codigo")
+    private val refPermisos =
+        FirebaseFirestore.getInstance().collection("/negocios/tablas/permisos").orderBy("codigo")
 
     private var trabajadoresActualizados =
         MutableLiveData<Array<Trabajador>>().apply { value = arrayOf() }
@@ -31,20 +33,23 @@ class NegociosViewModel : ViewModel() {
         MutableLiveData<Array<Transaccion>>().apply { value = arrayOf() }
 
     private val option_transaciones = FirestoreRecyclerOptions.Builder<Transaccion>()
-        .setQuery(ref_transaciones, SnapshotParser<Transaccion?> { snapshot: DocumentSnapshot ->
+        .setQuery(refTransaciones, SnapshotParser<Transaccion?> { snapshot: DocumentSnapshot ->
             val retornar = snapshot.toObject(Transaccion::class.java)
+            retornar?.id = snapshot.id
             return@SnapshotParser retornar!!
         }).build()
 
     private val option_trabajadores = FirestoreRecyclerOptions.Builder<Trabajador>()
-        .setQuery(ref_trabajadores, SnapshotParser<Trabajador?> { snapshot: DocumentSnapshot ->
+        .setQuery(refTrabajadores, SnapshotParser<Trabajador?> { snapshot: DocumentSnapshot ->
             val retornar = snapshot.toObject(Trabajador::class.java)
+            retornar?.id = snapshot.id
             return@SnapshotParser retornar!!
         }).build()
 
     private val option_permisos = FirestoreRecyclerOptions.Builder<Permiso>()
-        .setQuery(ref_permisos, SnapshotParser<Permiso?> { snapshot: DocumentSnapshot ->
+        .setQuery(refPermisos, SnapshotParser<Permiso?> { snapshot: DocumentSnapshot ->
             val retornar = snapshot.toObject(Permiso::class.java)
+            retornar?.id = snapshot.id
             return@SnapshotParser retornar!!
         }).build()
 
@@ -103,7 +108,7 @@ class NegociosViewModel : ViewModel() {
                     position: Int,
                     model: Trabajador
                 ) {
-                    holder.bind(model)
+                    holder.bind()
                 }
 
                 override fun onError(e: FirebaseFirestoreException) {
@@ -141,7 +146,7 @@ class NegociosViewModel : ViewModel() {
                     model: Transaccion
                 ) {
                     if (model.estadoPermiso == "a" && model.estadoTrabajdor == "a") {
-                        holder.bind(model)
+                        holder.bind()
                     }
 
                 }

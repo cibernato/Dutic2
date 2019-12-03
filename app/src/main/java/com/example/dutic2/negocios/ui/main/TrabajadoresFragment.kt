@@ -1,6 +1,10 @@
 package com.example.dutic2.negocios.ui.main
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +15,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dutic2.negocios.NegociosViewModel
 import com.example.dutic2.R
+import com.example.dutic2.negocios.models.Trabajador
+import com.example.dutic2.negocios.models.TrabajadorAdapter
+import com.example.dutic2.negocios.models.TrabajadorViewHolder
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.trabajadores_fragment.*
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class TrabajadoresFragment : Fragment() {
-
+class TrabajadoresFragment : Fragment(), TrabajadorAdapter.TrabajadorViewHolderListener {
+    val ref_trabajadores =
+        FirebaseFirestore.getInstance().collection("/negocios/tablas/trabajadores")
     private lateinit var negociosViewModel: NegociosViewModel
+    lateinit var adapter: TrabajadorAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.let {
             negociosViewModel = ViewModelProviders.of(it).get(NegociosViewModel::class.java)
         }
-
     }
 
     override fun onCreateView(
@@ -39,8 +49,56 @@ class TrabajadoresFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         trabajadores_recycler_view.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        negociosViewModel.getAdapterTrabajadores().observe(this, Observer {
-            trabajadores_recycler_view.adapter = it
+
+        negociosViewModel.getTrabajadoresActualizados().observe(this, Observer {
+            adapter = TrabajadorAdapter(arrayListOf<Trabajador>().apply {
+                addAll(it)
+            }, this)
+            trabajadores_recycler_view.adapter = adapter
         })
+        add_trabajador_button.setOnClickListener {
+            crearDialogTrabajador(Trabajador())
+        }
     }
+
+    fun crearDialogTrabajador(trabajador: Trabajador) {
+        val i = AddDialogFragment.newInstance(trabajador)
+        i.setTargetFragment(this, 123)
+        i.show(fragmentManager!!, "kappa")
+    }
+
+    override fun onClickTrabajador(trabajador: Trabajador) {
+        Log.e("PTMR", "Enviado $trabajador")
+        crearDialogTrabajador(trabajador)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 123) {
+//            Log.e("aaa","Recibido ${data?.getParcelableExtra<Trabajador>("valor")}")
+            val recibido = data?.getParcelableExtra<Trabajador>("valor")!!
+            if (recibido.nombre.isNotEmpty()) pushToDatabase(recibido)
+            else Log.e("Activity REsult", " No se realizo nada ")
+        }
+    }
+
+    fun pushToDatabase(trabajador: Trabajador) {
+        if (trabajador.codigo.isNotEmpty()) {
+            Log.e("PushtoDatabse", "codigo actual ${trabajador.codigo}")
+            FirebaseFirestore.getInstance()
+                .document("/negocios/tablas/trabajadores/${trabajador.id}").set(
+                trabajador, SetOptions.merge()
+            )
+
+        } else {
+            val x = adapter.trabajadores.last()
+            Log.e("PushtoDatabse", "ultimo codiog ${x.codigo}")
+            trabajador.codigo = "${x.codigo.toInt() + 1}"
+            trabajador.estado = "a"
+            ref_trabajadores.add(trabajador).addOnCompleteListener {
+                Log.e("PushtoDatabse", "Subio corectament con id ${it.result?.id}")
+            }
+        }
+    }
+
+
 }
