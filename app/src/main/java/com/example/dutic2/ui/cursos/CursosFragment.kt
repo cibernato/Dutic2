@@ -28,22 +28,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_cursos.*
 import java.lang.Exception
 
-class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener
-     {
+class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
     override fun onCrsoClicked(curso: Curso) {
         val args = bundleOf("curso" to curso)
-        navController.navigate(R.id.nav_cursoDetallesFragment, args)
-    }
+        navController.navigate(R.id.nav_cursoDetallesFragment, args)   }
 
-    interface CursosFragmentListener {
-        fun sendToActivity(cursos: Array<Curso>)
-    }
 
     lateinit var sharedMainViewModel: SharedMainViewModel
-    lateinit var cursosFragmentListener: CursosFragmentListener
     var firestoreRecyclerAdapter: FirestoreRecyclerAdapter<Curso, CursoViewHolder>? = null
     var cursos: Array<Curso>? = arrayOf()
-//    private lateinit var cursosViewModel: CursosViewModel
+    //    private lateinit var cursosViewModel: CursosViewModel
     var user = FirebaseAuth.getInstance().currentUser
     private lateinit var navController: NavController
     override fun onCreateView(
@@ -57,10 +51,11 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         activity?.let {
-            sharedMainViewModel = ViewModelProviders.of(it).get(SharedMainViewModel::class.java).apply {
-                this.mCursoClickListener = this@CursosFragment
-                this.text = getString(R.string.tienes_dos_tareas_pendientes)
-            }
+            sharedMainViewModel =
+                ViewModelProviders.of(it).get(SharedMainViewModel::class.java).apply {
+                    this.mCursoClickListener = this@CursosFragment
+                    this.text = getString(R.string.tienes_dos_tareas_pendientes)
+                }
         }
         navController = findNavController()
         texto_bienvenida.text = getString(R.string.hola).format("${user?.displayName}")
@@ -77,16 +72,6 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener
                 firestoreRecyclerAdapter?.startListening()
             })
         super.onViewCreated(view, savedInstanceState)
-    }
-
-         override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is CursosFragmentListener) {
-            cursosFragmentListener = context
-        } else {
-            throw RuntimeException("$context must implement CursosFragmentListener")
-        }
-
     }
 
 

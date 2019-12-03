@@ -31,16 +31,12 @@ class PlantillaCursosFragment : Fragment(), PlantillaCursoAdapter.PlantillaClick
         return inflater.inflate(R.layout.plantilla_cursos_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("erroe on pause", "${arguments?.getSerializable("cursos")}")
+        Log.e("PlantillaCursoFragment", "${arguments?.getParcelableArray("cursos")?.size}")
         cursos = arguments?.getParcelableArray("cursos") as Array<Curso>
         flag = arguments?.getString("flag")!!
-        Log.e("Flag", "incoming $flag")
+        Log.e("Flag", "incoming $flag , ${cursos.size}")
         adapter = PlantillaCursoAdapter(cursos, this)
         plantilla_cursos_recycler_view.layoutManager =
             GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
@@ -56,13 +52,13 @@ class PlantillaCursosFragment : Fragment(), PlantillaCursoAdapter.PlantillaClick
         val args = bundleOf("curso" to curso)
         when (flag) {
             "voz" -> {
-                navCtrl.navigate(R.id.nav_notas_de_voz,args)
+                navCtrl.navigate(R.id.nav_notas_de_voz, args)
             }
-            "imagenes"-> {
-                navCtrl.navigate(R.id.nav_cursoFotos,args)
+            "imagenes" -> {
+                navCtrl.navigate(R.id.nav_cursoFotos, args)
             }
             else -> {
-                navCtrl.navigate(R.id.nav_archivos)
+                navCtrl.navigate(R.id.nav_archivos, args)
             }
 
         }

@@ -90,6 +90,7 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
         notas_voz_stop_button.setOnClickListener {
             detenerGrabacion()
         }
+
     }
 
     private fun crearCarpeta() {
@@ -205,35 +206,59 @@ class NotasDeVozFragment : Fragment(), GrabacionesController.OpcionesClickListen
             REQUEST_AUDIO_PERMISSION_CODE
         )
     }
-
+    var currentPos = 0
     override fun onPlayPauseClick(model: GrabacionModel_, position: Int, clickedView: View) {
         val image = (clickedView as ImageButton)
-        if (mPlayer.isPlaying) {
-            mPlayer.pause()
-        } else {
-            if (mPlayer.currentPosition != 0) {
-                mPlayer.start()
+        try {
+            if (mPlayer.isPlaying ) {
+                mPlayer.pause()
+                currentPos = mPlayer.currentPosition
+                image.setImageDrawable(resources.getDrawable(R.drawable.ic_play_icon))
             } else {
-                try {
+                if (currentPos != 0) {
+                    mPlayer.start()
+                    currentPos = 0
+                    image.setImageDrawable(resources.getDrawable(R.drawable.ic_pause_icon))
+                } else {
+                    try {
                     mPlayer = MediaPlayer()
                     mPlayer.setDataSource(model.path().path)
                     mPlayer.prepare()
-                    mPlayer.start()
-                    image.setImageDrawable(resources.getDrawable(R.drawable.ic_pause_icon))
-                    mPlayer.setOnCompletionListener {
-                        it.release()
-                        reiniciarMediaPlayer()
-                        image.setImageDrawable(resources.getDrawable(R.drawable.ic_play_icon))
+//                        mPlayer = MediaPlayer.create(context,model.path)
+                        mPlayer.start()
+                        image.setImageDrawable(resources.getDrawable(R.drawable.ic_pause_icon))
+                        mPlayer.setOnCompletionListener {
+                            reiniciarMediaPlayer()
+                            image.setImageDrawable(resources.getDrawable(R.drawable.ic_play_icon))
+                        }
+                    } catch (e: Exception) {
+                        Log.e(LOG_TAG, "prepare() failed")
                     }
-                } catch (e: Exception) {
-                    Log.e(LOG_TAG, "prepare() failed")
                 }
             }
+        }catch (e:Exception){
+            Log.e(LOG_TAG, "$e")
+            e.printStackTrace()
         }
+
+    }
+
+    override fun onPause() {
+        reiniciarMediaPlayer()
+        Log.e(LOG_TAG, "nPause ${mPlayer}")
+        super.onPause()
     }
 
     private fun reiniciarMediaPlayer() {
+        mPlayer.reset()
+        mPlayer.release()
         mPlayer = MediaPlayer()
+    }
+
+    override fun onResume() {
+        mPlayer = MediaPlayer()
+        gController.requestModelBuild()
+        super.onResume()
     }
 
     override fun onOpcionesClick(model: GrabacionModel_, position: Int) {

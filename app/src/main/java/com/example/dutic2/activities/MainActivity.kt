@@ -25,21 +25,17 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
+import com.example.dutic2.negocios.NegociosActivity
 import com.example.dutic2.R
 import com.example.dutic2.models.Curso
-import com.example.dutic2.ui.cursos.CursosFragment
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.text.SimpleDateFormat
-import java.util.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    CursosFragment.CursosFragmentListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mFirebaseAuth: FirebaseAuth
@@ -172,6 +168,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        sharedMainViewModel?.getCursosActualizados()?.observe(this, androidx.lifecycle.Observer {
+            cursos =it
+        })
         when (menuItem.itemId) {
             R.id.nav_home -> {
                 navController.navigate(R.id.nav_home)
@@ -192,8 +191,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             }
             R.id.nav_configuraciones -> {
-                navController.navigate(R.id.nav_configuraciones)
+//                navController.navigate(R.id.nav_configuraciones)
+                startActivity(Intent(this,NegociosActivity::class.java))
             }
+
             R.id.nav_notas_de_voz -> {
                 val args = Bundle()
                 try {
@@ -233,6 +234,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Log.e("Error en try", "$e, values $cursos , args $args")
                 }
             }
+
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -293,9 +295,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         actionBar?.setBackgroundDrawable(ColorDrawable(color))
     }
 
-    override fun sendToActivity(cursos: Array<Curso>) {
-        this.cursos = cursos
-    }
+
 
 
 }

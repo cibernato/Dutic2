@@ -71,7 +71,11 @@
         android:id="@+id/nav_archivos"
         android:name="com.example.dutic2.ui.archivos.ArchivosFragment"
         android:label="@string/menu_archivos"
-        tools:layout="@layout/archivos_fragment" />
+        tools:layout="@layout/archivos_fragment" >
+        <argument
+            android:name="curso"
+            app:argType="com.example.dutic2.models.Curso" />
+    </fragment>
     <fragment
         android:id="@+id/nav_cursoDetallesFragment"
         android:name="com.example.dutic2.ui.cursoDetalles.CursoDetallesFragment"

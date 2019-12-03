@@ -30,6 +30,7 @@ import com.example.dutic2.activities.SharedMainViewModel
 import com.example.dutic2.activities.ViewPagerDetalleFotosActivity
 import com.example.dutic2.models.Curso
 import com.example.dutic2.models.FotoModel_
+import com.example.dutic2.utils.DIRECTORIO_RAIZ
 import com.example.dutic2.utils.FotoController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
@@ -49,11 +50,9 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
 
     var fotos = arrayListOf<File>()
     private lateinit var pathToFile: String
-    private val references = mutableListOf<String>()
     private var user = FirebaseAuth.getInstance().currentUser
     private lateinit var viewModel: SharedMainViewModel
     lateinit var archivosController: FotoController
-    private var prueba = arrayListOf<String>()
     private lateinit var curso: Curso
     private lateinit var pathCarpeta: File
     var storageReference = FirebaseStorage.getInstance()
@@ -101,34 +100,6 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
                 }
             }
         }
-        /*storageReference.getReference("/prueba").listAll()
-            .addOnSuccessListener { listResult ->
-                listResult.items.forEach { storageReference ->
-                    //                    references.add(storageReference)
-                    Log.e("Path", "path= ${storageReference.path}")
-                    prueba.add(storageReference.path)
-                    archivosController.requestModelBuild()
-                }
-            }.addOnFailureListener {
-                it.printStackTrace()
-            }
-        try {
-            storageReference.getReference("/${user?.uid}").listAll()
-                .addOnSuccessListener { listResult ->
-                    listResult.items.forEach { storageReference ->
-                        references.add(storageReference.path)
-//                        prueba.add(storageReference.path)
-                        archivosController.requestModelBuild()
-                    }
-                }.addOnFailureListener {
-                    Log.e("FailureListener", "$it")
-                }.addOnCompleteListener {
-                    Log.e("CompleteListener", " ${it.result}, $it")
-                }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }*/
-//        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         recyclerView.layoutManager = GridLayoutManager(context, 3)
         archivosController = FotoController(fotos, this)
         recyclerView.setControllerAndBuildModels(archivosController)
@@ -137,7 +108,7 @@ class CursoFotosFragment : Fragment(), FotoController.EpoxyClickListener {
 
     private fun crearCarpeta() {
         val folder =
-            File(Environment.getExternalStorageDirectory().toString() + File.separator + getString(R.string.app_name) + File.separator + curso.nombre)
+            File(DIRECTORIO_RAIZ + File.separator+ curso.nombre + File.separator +"Imagenes")
         if (!folder.exists()) {
             folder.mkdirs()
             pathCarpeta = folder

@@ -64,10 +64,8 @@ class PromediosGeneralFragment : Fragment(), PromedioGeneralAdapter.PromedioGene
 
         })
         sharedViewModel.getCursosActualizados().observe(this, Observer {
-            Log.e("oberser SharedViewModel", "before ${it.toMutableList()}")
             cursos2?.clear()
             cursos2?.addAll(it)
-            Log.e("oberser SharedViewModel", "after $cursos2")
             adapter.notifyDataSetChanged()
         })
 

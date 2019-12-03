@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.dutic2.R
 import com.example.dutic2.activities.MainActivity
+import com.example.dutic2.activities.SharedMainViewModel
 import com.example.dutic2.models.Curso
 import com.example.dutic2.utils.GlideApp
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +28,7 @@ class CursoDetallesFragment : Fragment() {
         fun newInstance() = CursoDetallesFragment()
     }
 
-    private lateinit var viewModel: CursoDetallesViewModel
+    private lateinit var viewModel: SharedMainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,9 @@ class CursoDetallesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inicializarVistas()
-        viewModel = ViewModelProviders.of(this).get(CursoDetallesViewModel::class.java)
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
+        }
 
     }
 
@@ -70,13 +73,18 @@ class CursoDetallesFragment : Fragment() {
             }
 
         }
+        val args =bundleOf("curso" to curso)
         curso_detalles_notas_de_voz.setOnClickListener {
-            val args =bundleOf("curso" to curso)
+
             findNavController().navigate(R.id.nav_notas_de_voz,args)
         }
         curso_detalles_publicaciones.setOnClickListener {
-            val args = bundleOf("curso" to curso)
+
             findNavController().navigate(R.id.nav_publicaciones,args)
+        }
+        curso_detalles_archivos.setOnClickListener {
+
+            findNavController().navigate(R.id.nav_archivos,args)
         }
 
     }
