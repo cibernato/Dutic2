@@ -1,9 +1,7 @@
 package com.example.dutic2.models
 
-import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
 
 @Parcelize
 data class Curso(

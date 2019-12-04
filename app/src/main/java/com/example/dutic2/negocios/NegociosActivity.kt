@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.dutic2.negocios.ui.main.NegociosFragment
 import com.example.dutic2.R
+import com.example.dutic2.negocios.ui.main.NegociosFragment
 
 class NegociosActivity : AppCompatActivity() {
     lateinit var negociosViewModel: NegociosViewModel

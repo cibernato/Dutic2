@@ -1,8 +1,6 @@
 package com.example.dutic2.ui.cursos
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,13 +18,8 @@ import com.example.dutic2.models.Curso
 import com.example.dutic2.models.CursoViewHolder
 import com.example.dutic2.utils.GlideApp
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.firebase.ui.firestore.SnapshotParser
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_cursos.*
-import java.lang.Exception
 
 class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
     override fun onCrsoClicked(curso: Curso) {

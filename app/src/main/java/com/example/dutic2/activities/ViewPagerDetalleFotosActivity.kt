@@ -3,9 +3,9 @@ package com.example.dutic2.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.example.dutic2.R
@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_view_pager_detalle_fotos.*
 import java.io.File
-import java.lang.Exception
 
 class ViewPagerDetalleFotosActivity : AppCompatActivity() {
 

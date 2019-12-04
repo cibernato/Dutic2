@@ -1,7 +1,5 @@
 package com.example.dutic2.negocios.ui.main
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,11 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dutic2.negocios.NegociosViewModel
 import com.example.dutic2.R
+import com.example.dutic2.negocios.NegociosViewModel
 import com.example.dutic2.negocios.models.Trabajador
 import com.example.dutic2.negocios.models.TrabajadorAdapter
-import com.example.dutic2.negocios.models.TrabajadorViewHolder
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.trabajadores_fragment.*

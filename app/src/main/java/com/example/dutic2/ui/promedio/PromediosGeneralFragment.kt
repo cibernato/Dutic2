@@ -3,26 +3,20 @@ package com.example.dutic2.ui.promedio
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.dutic2.R
 import com.example.dutic2.activities.SharedMainViewModel
 import com.example.dutic2.adapters.PromedioGeneralAdapter
 import com.example.dutic2.models.Curso
-import com.example.dutic2.models.Promedio
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_promedios_general.*
 
 /**
@@ -69,13 +63,6 @@ class PromediosGeneralFragment : Fragment(), PromedioGeneralAdapter.PromedioGene
             adapter.notifyDataSetChanged()
         })
 
-    }
-
-    override fun onStop() {
-//        var calendarioReferencia =
-//            FirebaseFirestore.getInstance().document("/usuarios/${FirebaseAuth.getInstance().currentUser?.uid}/cursos/${curso.uid}")
-//        val t = gson.fromJson<Array<Promedio>>(curso.promedios,object : TypeToken<Array<Promedio>>() {}.type)
-        super.onStop()
     }
 
     override fun onPromedioGeneralListener(curso: Curso) {

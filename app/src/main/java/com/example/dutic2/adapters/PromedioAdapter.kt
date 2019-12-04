@@ -1,6 +1,5 @@
 package com.example.dutic2.adapters
 
-import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import com.example.dutic2.R
 import com.example.dutic2.models.Promedio
 import com.example.dutic2.ui.promedio.PromediosFragment
 import com.google.android.material.textfield.TextInputLayout
-import java.lang.Exception
 
 class PromedioAdapter(
     var promedios

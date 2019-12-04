@@ -3,14 +3,13 @@ package com.example.dutic2.ui.cursoDetalles
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-
 import com.example.dutic2.R
 import com.example.dutic2.activities.MainActivity
 import com.example.dutic2.activities.SharedMainViewModel

@@ -15,7 +15,6 @@ import com.example.dutic2.models.Curso
 import com.example.dutic2.models.Promedio
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.lang.Exception
 
 class PromedioGeneralAdapter(
     var cursos: ArrayList<Curso>,
@@ -70,7 +69,7 @@ class PromedioGeneralAdapter(
                     object : TypeToken<Array<Promedio>>() {}.type)
                 var progreso = 0
                 t.forEach {
-                    progreso += it.porcentaje!!
+                    progreso += it.porcentaje
                 }
                 pBar.progress = progreso
                 itemView.setOnClickListener {

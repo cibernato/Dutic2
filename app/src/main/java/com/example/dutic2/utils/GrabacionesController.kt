@@ -5,7 +5,6 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import com.example.dutic2.models.GrabacionModel_
 import java.util.*
-import kotlin.collections.ArrayList
 
 class GrabacionesController(
     var paths: ArrayList<Uri>,

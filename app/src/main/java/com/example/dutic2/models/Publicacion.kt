@@ -10,6 +10,4 @@ class Publicacion(
     var tieneAdjuntos : Boolean? = false,
     var contenido : String? = null,
     var adjuntos : List<String>? = listOf()
-    ) : Serializable{
-
-}
+) : Serializable

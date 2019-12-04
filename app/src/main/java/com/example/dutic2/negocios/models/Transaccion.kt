@@ -15,5 +15,4 @@ class Transaccion(
     var nombrePermiso: String = "",
     var nombreTrabajador: String = "",
     var estadoTrabajdor: String = ""
-) : Parcelable {
-}
+) : Parcelable

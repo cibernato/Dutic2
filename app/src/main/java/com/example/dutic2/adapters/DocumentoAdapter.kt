@@ -3,7 +3,6 @@ package com.example.dutic2.adapters
 import android.app.Activity
 import android.net.Uri
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
@@ -37,12 +36,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.curso_fotos_fragment.*
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FilenameFilter
 import java.io.IOException
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 

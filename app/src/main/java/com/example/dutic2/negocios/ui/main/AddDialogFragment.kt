@@ -1,27 +1,20 @@
 package com.example.dutic2.negocios.ui.main
 
 
-import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.DisplayMetrics
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.*
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.DialogFragment
-
+import androidx.fragment.app.Fragment
 import com.example.dutic2.R
 import com.example.dutic2.negocios.models.Permiso
 import com.example.dutic2.negocios.models.Trabajador
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.fragment_add_dialog.*
 
 /**
  * A simple [Fragment] subclass.

@@ -32,21 +32,21 @@ class NegociosViewModel : ViewModel() {
     private var transaccionesActualizados =
         MutableLiveData<Array<Transaccion>>().apply { value = arrayOf() }
 
-    private val option_transaciones = FirestoreRecyclerOptions.Builder<Transaccion>()
+    private val optionTransaciones = FirestoreRecyclerOptions.Builder<Transaccion>()
         .setQuery(refTransaciones, SnapshotParser<Transaccion?> { snapshot: DocumentSnapshot ->
             val retornar = snapshot.toObject(Transaccion::class.java)
             retornar?.id = snapshot.id
             return@SnapshotParser retornar!!
         }).build()
 
-    private val option_trabajadores = FirestoreRecyclerOptions.Builder<Trabajador>()
+    private val optionTrabajadores = FirestoreRecyclerOptions.Builder<Trabajador>()
         .setQuery(refTrabajadores, SnapshotParser<Trabajador?> { snapshot: DocumentSnapshot ->
             val retornar = snapshot.toObject(Trabajador::class.java)
             retornar?.id = snapshot.id
             return@SnapshotParser retornar!!
         }).build()
 
-    private val option_permisos = FirestoreRecyclerOptions.Builder<Permiso>()
+    private val optionPermisos = FirestoreRecyclerOptions.Builder<Permiso>()
         .setQuery(refPermisos, SnapshotParser<Permiso?> { snapshot: DocumentSnapshot ->
             val retornar = snapshot.toObject(Permiso::class.java)
             retornar?.id = snapshot.id
@@ -55,7 +55,7 @@ class NegociosViewModel : ViewModel() {
 
     private val adapterPermiso by lazy {
         MutableLiveData<FirestoreRecyclerAdapter<Permiso, PermisoViewHolder>>().apply {
-            value = object : FirestoreRecyclerAdapter<Permiso, PermisoViewHolder>(option_permisos) {
+            value = object : FirestoreRecyclerAdapter<Permiso, PermisoViewHolder>(optionPermisos) {
 
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
@@ -71,7 +71,7 @@ class NegociosViewModel : ViewModel() {
                     position: Int,
                     model: Permiso
                 ) {
-                    holder.bind(model)
+                    holder.bind()
                 }
 
                 override fun onError(e: FirebaseFirestoreException) {
@@ -83,7 +83,6 @@ class NegociosViewModel : ViewModel() {
                     super.onDataChanged()
                     val t = this@apply.value?.snapshots?.toTypedArray()
                     permisosActualizados.postValue(t)
-                    Log.e("viewModelShared fra", "Noptficia el cambio en datos ")
                 }
             }
         }
@@ -92,7 +91,7 @@ class NegociosViewModel : ViewModel() {
     private val adapterTrabajador by lazy {
         MutableLiveData<FirestoreRecyclerAdapter<Trabajador, TrabajadorViewHolder>>().apply {
             value = object :
-                FirestoreRecyclerAdapter<Trabajador, TrabajadorViewHolder>(option_trabajadores) {
+                FirestoreRecyclerAdapter<Trabajador, TrabajadorViewHolder>(optionTrabajadores) {
 
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
@@ -120,7 +119,6 @@ class NegociosViewModel : ViewModel() {
                     super.onDataChanged()
                     val t = this@apply.value?.snapshots?.toTypedArray()
                     trabajadoresActualizados.postValue(t)
-                    Log.e("viewModelShared fra", "Noptficia el cambio en datos ")
                 }
             }
         }
@@ -129,7 +127,7 @@ class NegociosViewModel : ViewModel() {
     private val adapterTransaccion by lazy {
         MutableLiveData<FirestoreRecyclerAdapter<Transaccion, TranasaccionViewHolder>>().apply {
             value = object :
-                FirestoreRecyclerAdapter<Transaccion, TranasaccionViewHolder>(option_transaciones) {
+                FirestoreRecyclerAdapter<Transaccion, TranasaccionViewHolder>(optionTransaciones) {
 
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
@@ -160,7 +158,6 @@ class NegociosViewModel : ViewModel() {
                     super.onDataChanged()
                     val t = this@apply.value?.snapshots?.toTypedArray()
                     transaccionesActualizados.postValue(t)
-                    Log.e("viewModelShared fra", "Noptficia el cambio en datos ")
                 }
             }
         }

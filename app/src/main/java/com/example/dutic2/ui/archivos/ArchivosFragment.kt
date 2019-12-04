@@ -10,8 +10,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.DocumentsContract
-import android.provider.DocumentsProvider
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,7 +38,10 @@ import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.archivos_fragment.*
 import kotlinx.coroutines.launch
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.FilenameFilter
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.Comparator

@@ -1,7 +1,9 @@
 package com.example.dutic2.ui.publicaciones
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dutic2.R
 import com.example.dutic2.adapters.ViewPagerPublicacionesAdapter
@@ -33,13 +35,4 @@ class PublicacionesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        try {
-//            activity?.actionBar!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-//        }catch (e: Exception){
-//            e.printStackTrace()
-//        }
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 }
