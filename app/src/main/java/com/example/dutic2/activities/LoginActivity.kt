@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
                     .setTheme(R.style.LoginTheme)
-                    .setLogo(R.mipmap.logo)
+                    .setLogo(R.drawable.logo2)
                     .setIsSmartLockEnabled(true)
                     .build(),
                 699

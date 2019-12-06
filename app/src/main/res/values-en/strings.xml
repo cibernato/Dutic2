@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dutic 2</string>
+    <string name="curso_nombre">Course : %s</string>
+    <string name="pondera_tus_notas">AVERAGE YOUR NOTES</string>
+    <string name="recordatorios">REMINDERS</string>
+    <string name="tienes_3_tareas_pendientes">You have 3 pending tasks</string>
+    <string name="tienes_dos_tareas_pendientes">You have %1$d pending tasks</string>
+    <string name="tus_cursos">Your Courses:</string>
+    <string name="una_aplicacion_para_el_estudiante_moderno">An application for the modern student.</string>
+    <string name="varios">VARIOUS</string>
+    <string name="menu_promedios">Averages</string>
+    <string name="menu_tareas">Homework</string>
+    <string name="menu_notas_de_voz">Voice Notes</string>
+    <string name="menu_mensajes">Messages</string>
+    <string name="menu_cursos">Courses</string>
+    <string name="menu_configuraciones">Configurations</string>
+    <string name="menu_archivos">Files</string>
+    <string name="hola">Hi, %s</string>
+    <string name="idioma">Change Language</string>
+    <string name="galeria">Gallery</string>
+    <string name="configuraciones">Configurations</string>
+    <string name="configuracion">Configuration</string>
+    <string name="cerrar_sesion">Sign off</string>
+    <string name="calendario">Calendar</string>
+    <string name="apuntes_rapidos">FAST NOTES</string>
+    <string name="action_settings">Settings</string>
+    <string name="cambiar_idioma">Are you sure to change your language?</string>
+    <string name="no">No</string>
+    <string name="si">Yes</string>
+    <string name="cambiar_idioma_titulo">Change Language</string>
+</resources>

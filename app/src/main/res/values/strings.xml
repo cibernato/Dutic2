@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Dutic 2</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_cursos">Cursos</string>
@@ -16,16 +16,32 @@
     <string name="menu_archivos">Archivos</string>
     <string name="tienes_dos_tareas_pendientes">Tienes %1$d tareas pendientes</string>
     <string name="hola">Hola, %s</string>
-    <string name="curso_nombre">Curso : %s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_negocios">NegociosActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_negocios" translatable="false">NegociosActivity</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
     <string-array name="Estados">
         <item>Activo</item>
         <item>Inactivo</item>
         <item>Eliminado</item>
     </string-array>
+    <string name="curso_nombre">Curso : %s</string>
+    <string name="pondera_tus_notas">PONDERA TUS NOTAS</string>
+    <string name="apuntes_rapidos">APUNTES RAPIDOS</string>
+    <string name="recordatorios">RECORDATORIOS</string>
+    <string name="varios">VARIOS</string>
+    <string name="tus_cursos">Tus Cursos:</string>
+    <string name="tienes_3_tareas_pendientes">Tienes 3 tareas pendientes</string>
+    <string name="galeria">Galeria</string>
+    <string name="calendario">Calendario</string>
+    <string name="configuracion">Configuracion</string>
+    <string name="configuraciones">Configuraciones</string>
+    <string name="cerrar_sesion">Cerrar sesion</string>
+    <string name="idioma">Cambiar Idioma</string>
+    <string name="una_aplicacion_para_el_estudiante_moderno">Una aplicacion para el estudiante moderno.</string>
+    <string name="cambiar_idioma">Esta seguro de cambiar de idioma</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="cambiar_idioma_titulo">Cambiar Idioma</string>
 </resources>

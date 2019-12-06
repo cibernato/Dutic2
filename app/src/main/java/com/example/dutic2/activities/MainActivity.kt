@@ -2,6 +2,7 @@ package com.example.dutic2.activities
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -35,8 +36,9 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.jakewharton.threetenabp.AndroidThreeTen
+import java.util.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mFirebaseAuth: FirebaseAuth
@@ -54,7 +56,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var registered = false
     private lateinit var mAuthStateListener: FirebaseAuth.AuthStateListener
     var cursos: Array<Curso>? = arrayOf()
-    var sharedMainViewModel :SharedMainViewModel? = null
+    var sharedMainViewModel: SharedMainViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.e("Oncreate MEthod", "SE ejecuta en cada camnbio de landscape a viewport")
         super.onCreate(savedInstanceState)
@@ -170,7 +173,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         sharedMainViewModel?.getCursosActualizados()?.observe(this, androidx.lifecycle.Observer {
-            cursos =it
+            cursos = it
         })
         when (menuItem.itemId) {
             R.id.nav_home -> {
@@ -193,7 +196,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_configuraciones -> {
 //                navController.navigate(R.id.nav_configuraciones)
-                startActivity(Intent(this,NegociosActivity::class.java))
+                startActivity(Intent(this, NegociosActivity::class.java))
             }
 
             R.id.nav_notas_de_voz -> {
@@ -296,7 +299,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         actionBar?.setBackgroundDrawable(ColorDrawable(color))
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_settings) {
+            AlertDialog.Builder(this).setTitle(getString(R.string.cambiar_idioma_titulo))
+                .setMessage(getString(R.string.cambiar_idioma))
+                .setPositiveButton(getString(R.string.si)) { dialog, _ ->
+                    val res = resources
+                    val dm = res.displayMetrics
+                    val conf = res.configuration
+                    if (resources.configuration.locale.language == "es") {
+                        val myLocale = Locale("en")
+                        conf.locale = myLocale
+                        res.updateConfiguration(conf, dm)
+                    } else if (resources.configuration.locale.language == "en") {
+                        val myLocale = Locale("es")
+                        conf.locale = myLocale
+                        res.updateConfiguration(conf, dm)
+                    }
+                    val refresh = Intent(this, MainActivity::class.java)
+                    dialog.dismiss()
+                    this.finish()
+                    startActivity(refresh)
+                }.setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                    dialog.dismiss()
+                }.create().show()
+            Log.e("onOptionsItemSelected", "Entra ")
 
-
-
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

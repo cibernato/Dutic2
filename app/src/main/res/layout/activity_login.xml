@@ -32,7 +32,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.032"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/contrasenia"
@@ -47,7 +48,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usuario"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintVertical_bias="0.066"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_entrar"
@@ -61,6 +63,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contrasenia"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintVertical_bias="0.123"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
