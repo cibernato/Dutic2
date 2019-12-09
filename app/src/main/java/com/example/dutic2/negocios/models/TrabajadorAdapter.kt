@@ -4,6 +4,8 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dutic2.R
@@ -12,7 +14,27 @@ class TrabajadorAdapter(
     var trabajadores: ArrayList<Trabajador>,
     var mTrabajadorViewHolderListener: TrabajadorViewHolderListener
 ) :
-    RecyclerView.Adapter<TrabajadorAdapter.TrabajadorHolder>() {
+    RecyclerView.Adapter<TrabajadorAdapter.TrabajadorHolder>(), Filterable {
+
+    var trabajdoresTodos = arrayListOf<Trabajador>().apply { addAll(trabajadores) }
+    var trabajdoresFiltrados = arrayListOf<Trabajador>().apply { addAll(trabajadores) }
+
+    fun filterBy(filtros: java.util.ArrayList<String>) {
+        trabajadores.clear()
+        trabajdoresFiltrados.clear()
+        if (filtros.size == 0) {
+            trabajadores.addAll(trabajdoresTodos)
+        } else {
+            trabajdoresTodos.forEach {
+                if (it.estado in filtros) {
+                    trabajadores.add(it)
+                    trabajdoresFiltrados.add(it)
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
+
 
     interface TrabajadorViewHolderListener {
         fun onClickTrabajador(trabajador: Trabajador)
@@ -59,6 +81,33 @@ class TrabajadorAdapter(
             }
 
 
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return trabajdoresFilter
+    }
+
+    var trabajdoresFilter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = arrayListOf<Trabajador>()
+            if (constraint.isNullOrEmpty()) {
+                filteredList.addAll(trabajdoresFiltrados)
+            } else {
+                val filterPattern = constraint.toString().toLowerCase().trim()
+                trabajdoresFiltrados.forEach {
+                    if (it.nombre.toLowerCase().contains(filterPattern)) {
+                        filteredList.add(it)
+                    }
+                }
+            }
+            return FilterResults().apply { values = filteredList }
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            trabajadores.clear()
+            trabajadores.addAll(results?.values as ArrayList<Trabajador>)
+            notifyDataSetChanged()
         }
     }
 }

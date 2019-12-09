@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -65,7 +64,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         sharedMainViewModel = ViewModelProviders.of(this).get(SharedMainViewModel::class.java)
-        actionBar?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         checkSharedPreferences()
 //        registerUserInFirestore()
@@ -256,6 +254,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onPause() {
         super.onPause()
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener)
+
     }
 
     override fun onResume() {
@@ -264,9 +263,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        setColorBar(Color.WHITE)
         return true
     }
 
@@ -296,7 +293,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun setColorBar(color: Int) {
-        actionBar?.setBackgroundDrawable(ColorDrawable(color))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(color))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

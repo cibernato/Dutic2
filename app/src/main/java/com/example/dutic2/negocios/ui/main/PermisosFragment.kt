@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,6 +28,7 @@ class PermisosFragment : Fragment(), PermisoAdapter.PermisoClickListener {
     private val refPermisos =
         FirebaseFirestore.getInstance().collection("/negocios/tablas/permisos")
     lateinit var adapter: PermisoAdapter
+    var filtros = arrayListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,21 @@ class PermisosFragment : Fragment(), PermisoAdapter.PermisoClickListener {
         add_permiso_button.setOnClickListener {
             crearDialogPermiso(Permiso())
         }
+        permisos_busqueda.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+        filtros_permisos.setOnClickListener {
+            val f = FiltrosDialog.newInstance(filtros)
+            f.setTargetFragment(this, 123)
+            f.show(fragmentManager!!, "dialog")
+        }
     }
 
     private fun crearDialogPermiso(permiso: Permiso) {
@@ -68,6 +85,9 @@ class PermisosFragment : Fragment(), PermisoAdapter.PermisoClickListener {
             val recibido = data?.getParcelableExtra<Permiso>("valor")!!
             if (recibido.nombre.isNotEmpty()) pushToDatabase(recibido)
             else Log.e("REsultPermiso", " No se realizo nada ")
+        }
+        if (requestCode == 123) {
+            adapter.filterBy(filtros)
         }
     }
 

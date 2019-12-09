@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,6 +28,7 @@ class TrabajadoresFragment : Fragment(), TrabajadorAdapter.TrabajadorViewHolderL
         FirebaseFirestore.getInstance().collection("/negocios/tablas/trabajadores")
     private lateinit var negociosViewModel: NegociosViewModel
     lateinit var adapter: TrabajadorAdapter
+    var filtros = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,21 @@ class TrabajadoresFragment : Fragment(), TrabajadorAdapter.TrabajadorViewHolderL
         add_trabajador_button.setOnClickListener {
             crearDialogTrabajador(Trabajador())
         }
+        trabajadores_busqueda.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+        filtros_trabajadores.setOnClickListener {
+            val f = FiltrosDialog.newInstance(filtros)
+            f.setTargetFragment(this, 159)
+            f.show(fragmentManager!!, "dialog")
+        }
     }
 
     fun crearDialogTrabajador(trabajador: Trabajador) {
@@ -71,10 +88,11 @@ class TrabajadoresFragment : Fragment(), TrabajadorAdapter.TrabajadorViewHolderL
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 123) {
-//            Log.e("aaa","Recibido ${data?.getParcelableExtra<Trabajador>("valor")}")
             val recibido = data?.getParcelableExtra<Trabajador>("valor")!!
             if (recibido.nombre.isNotEmpty()) pushToDatabase(recibido)
-            else Log.e("Activity REsult", " No se realizo nada ")
+        }
+        if (requestCode == 159) {
+            adapter.filterBy(filtros)
         }
     }
 
@@ -83,8 +101,8 @@ class TrabajadoresFragment : Fragment(), TrabajadorAdapter.TrabajadorViewHolderL
             Log.e("PushtoDatabse", "codigo actual ${trabajador.codigo}")
             FirebaseFirestore.getInstance()
                 .document("/negocios/tablas/trabajadores/${trabajador.id}").set(
-                trabajador, SetOptions.merge()
-            )
+                    trabajador, SetOptions.merge()
+                )
 
         } else {
             val x = adapter.trabajadores.last()

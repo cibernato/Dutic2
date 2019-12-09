@@ -17,7 +17,7 @@
     <string name="tienes_dos_tareas_pendientes">Tienes %1$d tareas pendientes</string>
     <string name="hola">Hola, %s</string>
 
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_negocios" translatable="false">NegociosActivity</string>
     <string name="tab_text_1" translatable="false">Tab 1</string>
     <string name="tab_text_2" translatable="false">Tab 2</string>

@@ -4,6 +4,8 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dutic2.R
@@ -13,7 +15,25 @@ class PermisoAdapter(
     var permisos: ArrayList<Permiso>,
     var mPermisoClickListener: PermisoClickListener
 ) :
-    RecyclerView.Adapter<PermisoAdapter.PermisoHolder>() {
+    RecyclerView.Adapter<PermisoAdapter.PermisoHolder>(), Filterable {
+    var permisosTodos = arrayListOf<Permiso>().apply { addAll(permisos) }
+    var permisosFiltrados = arrayListOf<Permiso>().apply { addAll(permisos) }
+
+    fun filterBy(filtros: java.util.ArrayList<String>) {
+        permisos.clear()
+        permisosFiltrados.clear()
+        if (filtros.size == 0) {
+            permisos.addAll(permisosTodos)
+        } else {
+            permisosTodos.forEach {
+                if (it.estado in filtros) {
+                    permisos.add(it)
+                    permisosFiltrados.add(it)
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
 
     interface PermisoClickListener {
         fun onPermisoClick(permiso: Permiso)
@@ -71,4 +91,34 @@ class PermisoAdapter(
         }
 
     }
+
+    override fun getFilter(): Filter {
+        return permisoFilter
+    }
+
+    var permisoFilter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = arrayListOf<Permiso>()
+            if (constraint.isNullOrEmpty()) {
+                filteredList.addAll(permisosFiltrados)
+            } else {
+                val filterPattern = constraint.toString().toLowerCase().trim()
+                permisosFiltrados.forEach {
+                    if (it.nombre.toLowerCase().contains(filterPattern)) {
+                        filteredList.add(it)
+                    }
+                }
+            }
+            return FilterResults().apply { values = filteredList }
+
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            permisos.clear()
+            permisos.addAll(results?.values as ArrayList<Permiso>)
+            notifyDataSetChanged()
+        }
+    }
+
+
 }

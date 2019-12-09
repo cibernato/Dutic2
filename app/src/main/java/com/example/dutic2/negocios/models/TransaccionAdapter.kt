@@ -4,6 +4,8 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dutic2.R
@@ -12,9 +14,12 @@ class TransaccionAdapter(
     var transacciones: ArrayList<Transaccion>,
     var mTransaccionListener: TransaccionListener
 ) :
-    RecyclerView.Adapter<TransaccionAdapter.TransaccionHolder>() {
+    RecyclerView.Adapter<TransaccionAdapter.TransaccionHolder>(), Filterable {
 
-    interface TransaccionListener{
+    var transaccionesTodos = arrayListOf<Transaccion>().apply { addAll(transacciones) }
+    var transaccionesFiltradas = arrayListOf<Transaccion>().apply { addAll(transacciones) }
+
+    interface TransaccionListener {
         fun onClickTransaccion(model: Transaccion)
     }
 
@@ -69,5 +74,51 @@ class TransaccionAdapter(
             }
         }
 
+    }
+
+    override fun getFilter(): Filter {
+        return transaccionFilter
+    }
+
+    fun filterBy(filtros: java.util.ArrayList<String>) {
+        transacciones.clear()
+        transaccionesFiltradas.clear()
+        if (filtros.size == 0) {
+            transacciones.addAll(transaccionesTodos)
+        } else {
+            transaccionesTodos.forEach {
+                if (it.estado in filtros) {
+                    transacciones.add(it)
+                    transaccionesFiltradas.add(it)
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    var transaccionFilter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = arrayListOf<Transaccion>()
+            if (constraint.isNullOrEmpty()) {
+                filteredList.addAll(transaccionesFiltradas)
+            } else {
+                val filterPattern = constraint.toString().toLowerCase().trim()
+                transaccionesFiltradas.forEach {
+                    if (it.nombrePermiso.toLowerCase().contains(filterPattern) || it.nombreTrabajador.toLowerCase().contains(
+                            filterPattern
+                        )
+                    ) {
+                        filteredList.add(it)
+                    }
+                }
+            }
+            return FilterResults().apply { values = filteredList }
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            transacciones.clear()
+            transacciones.addAll(results?.values as ArrayList<Transaccion>)
+            notifyDataSetChanged()
+        }
     }
 }

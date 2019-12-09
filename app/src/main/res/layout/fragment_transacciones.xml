@@ -8,15 +8,6 @@
     android:padding="8dp"
     tools:context=".negocios.ui.main.TransaccionesFragment">
 
-    <Button
-        android:id="@+id/add_transaccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="añadir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transacciones_recycler_view"
         android:layout_width="0dp"
@@ -26,6 +17,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_transaccion"
+        app:layout_constraintTop_toBottomOf="@+id/transacciones_busqueda"
         tools:listitem="@layout/transaccion_list_item" />
+
+    <SearchView
+        android:id="@+id/transacciones_busqueda"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/filtros_transacciones"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_transaccion_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/add_transaccion_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="añadir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/filtros_transacciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filtros_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/transacciones_busqueda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/transacciones_busqueda" />
 </androidx.constraintlayout.widget.ConstraintLayout>

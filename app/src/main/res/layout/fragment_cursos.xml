@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,194 +11,155 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="331dp"
-            app:layout_constraintEnd_toEndOf="parent"
+        <Button
+            android:id="@+id/btn_notas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/forma_btn1menu"
+            android:gravity="center"
+            android:text="@string/pondera_tus_notas"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/pendientes_curso" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="216dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view1"
-                app:layout_constraintVertical_bias="0.001" />
+        <Button
+            android:id="@+id/btn_apuntes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/forma_btn3menu"
+            android:gravity="center"
+            android:text="@string/apuntes_rapidos"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_notas" />
 
-            <Button
-                android:id="@+id/btn_notas"
-                android:layout_width="153dp"
-                android:layout_height="93dp"
-                android:background="@drawable/forma_btn1menu"
-                android:gravity="center"
-                android:text="@string/pondera_tus_notas"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2"
-                app:layout_constraintVertical_bias="0.069" />
+        <Button
+            android:id="@+id/btn_recordatorios"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/forma_btn2menu"
+            android:gravity="center"
+            android:text="@string/recordatorios"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_notas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/btn_notas" />
 
-            <Button
-                android:id="@+id/btn_apuntes"
-                android:layout_width="153dp"
-                android:layout_height="93dp"
-                android:background="@drawable/forma_btn3menu"
-                android:gravity="center"
-                android:text="@string/apuntes_rapidos"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/btn_notas"
-                app:layout_constraintStart_toStartOf="@+id/btn_notas"
-                app:layout_constraintTop_toBottomOf="@+id/btn_notas"
-                app:layout_constraintVertical_bias="0.636" />
+        <Button
+            android:id="@+id/btn_otros"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/forma_btn4menu"
+            android:gravity="center"
+            android:text="@string/varios"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_apuntes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/btn_apuntes" />
 
-            <Button
-                android:id="@+id/btn_recordatorios"
-                android:layout_width="153dp"
-                android:layout_height="93dp"
-                android:background="@drawable/forma_btn2menu"
-                android:gravity="center"
-                android:text="@string/recordatorios"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toTopOf="@+id/view2"
-                app:layout_constraintVertical_bias="0.075" />
+        <TextView
+            android:id="@+id/texto_bienvenida"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="@string/hola"
+            android:textColor="#440E5D"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/foto_usuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/foto_usuario"
+            app:layout_constraintTop_toTopOf="@+id/foto_usuario"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/btn_otros"
-                android:layout_width="153dp"
-                android:layout_height="93dp"
-                android:background="@drawable/forma_btn4menu"
-                android:gravity="center"
-                android:text="@string/varios"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/btn_recordatorios"
-                app:layout_constraintStart_toStartOf="@+id/btn_recordatorios"
-                app:layout_constraintTop_toBottomOf="@+id/btn_recordatorios"
-                app:layout_constraintVertical_bias="0.619" />
+        <TextView
+            android:id="@+id/pendientes_curso"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tienes_3_tareas_pendientes"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/foto_usuario"
+            app:layout_constraintEnd_toEndOf="@+id/texto_bienvenida"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/texto_bienvenida"
+            app:layout_constraintTop_toTopOf="@+id/foto_usuario"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="SmallSp" />
 
-            <View
-                android:id="@+id/view1"
-                android:layout_width="340dp"
-                android:layout_height="73dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/hola_name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.492"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.037" />
+        <ImageView
+            android:id="@+id/foto_usuario"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/texto_bienvenida"
-                android:layout_width="212dp"
-                android:layout_height="31dp"
-                android:gravity="center"
-                android:text="@string/hola"
-                android:textColor="#440E5D"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view1"
-                app:layout_constraintEnd_toEndOf="@+id/view1"
-                app:layout_constraintHorizontal_bias="0.79"
-                app:layout_constraintStart_toStartOf="@+id/foto_usuario"
-                app:layout_constraintTop_toTopOf="@+id/view1"
-                app:layout_constraintVertical_bias="0.205" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-            <TextView
-                android:id="@+id/pendientes_curso"
-                android:layout_width="217dp"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="@string/tienes_3_tareas_pendientes"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view1"
-                app:layout_constraintEnd_toEndOf="@+id/view1"
-                app:layout_constraintHorizontal_bias="0.85"
-                app:layout_constraintStart_toStartOf="@+id/view1"
-                app:layout_constraintTop_toBottomOf="@+id/texto_bienvenida"
-                app:layout_constraintVertical_bias="0.323"
-                tools:ignore="SmallSp" />
-
-            <ImageView
-                android:id="@+id/foto_usuario"
-                android:layout_width="71dp"
-                android:layout_height="71dp"
-                android:background="@drawable/round_corners"
-                app:layout_constraintBottom_toBottomOf="@+id/view1"
-                app:layout_constraintEnd_toEndOf="@+id/view1"
-                app:layout_constraintHorizontal_bias="0.053"
-                app:layout_constraintStart_toStartOf="@+id/view1"
-                app:layout_constraintTop_toTopOf="@+id/view1" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:paddingBottom="8dp"
             android:text="@string/tus_cursos"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_apuntes" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_cursos"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:listitem="@layout/curso_list_item" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.27" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

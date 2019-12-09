@@ -15,4 +15,8 @@ class Transaccion(
     var nombrePermiso: String = "",
     var nombreTrabajador: String = "",
     var estadoTrabajdor: String = ""
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return "id $id, horas $horas, codigo $codigo, estado $estado, $codigoPermiso, $codigoTrabajador, $estadoPermiso, $estadoTrabajdor, $nombreTrabajador, $nombrePermiso"
+    }
+}

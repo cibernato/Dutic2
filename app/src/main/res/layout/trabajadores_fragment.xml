@@ -8,6 +8,15 @@
     android:padding="8dp"
     tools:context=".negocios.ui.main.TrabajadoresFragment">
 
+    <ImageButton
+        android:id="@+id/filtros_trabajadores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filtros_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/trabajadores_busqueda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/trabajadores_busqueda" />
+
     <Button
         android:id="@+id/add_trabajador_button"
         android:layout_width="wrap_content"
@@ -21,12 +30,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
+        android:id="@+id/trabajadores_busqueda"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/filtros_trabajadores"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_trabajador_button"
         app:layout_constraintVertical_bias="0.0" />
@@ -35,8 +46,9 @@
         android:id="@+id/trabajadores_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/trabajadores_busqueda" />
 </androidx.constraintlayout.widget.ConstraintLayout>

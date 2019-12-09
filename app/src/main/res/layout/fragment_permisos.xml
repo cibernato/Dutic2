@@ -7,11 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".negocios.ui.main.PermisosFragment" >
 
+    <ImageButton
+        android:id="@+id/filtros_permisos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filtros_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/permisos_busqueda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/permisos_busqueda" />
+
     <Button
         android:id="@+id/add_permiso_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Añadir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +38,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_permiso_button"
+        app:layout_constraintTop_toBottomOf="@+id/permisos_busqueda"
         tools:listitem="@layout/permiso_list_item" />
+
+    <SearchView
+        android:id="@+id/permisos_busqueda"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/filtros_permisos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_permiso_button"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
