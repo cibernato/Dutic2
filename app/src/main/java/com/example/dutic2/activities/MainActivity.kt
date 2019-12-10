@@ -34,7 +34,9 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import com.jakewharton.threetenabp.AndroidThreeTen
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         sharedMainViewModel = ViewModelProviders.of(this).get(SharedMainViewModel::class.java)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         checkSharedPreferences()
-//        registerUserInFirestore()
+        registerUserInFirestore()
         AndroidThreeTen.init(this)
         mFirebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -119,31 +121,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         registered = sharedPreferences.getBoolean(user?.uid, true)
     }
 
-//    private fun registerUserInFirestore() {
-//        if (registered) {
-//            val c = Calendar.getInstance()
-//            val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-//            try {
-//                FirebaseFirestore.getInstance().document("/usuarios/${user?.uid}")
-//                    .set(hashMapOf("fechaCreated" to sdf.format(c.time)))
-//                    .addOnFailureListener {
-//                        Log.e("error", "$it, irrecuperable")
-//                    }.addOnSuccessListener {
-//                        editor = sharedPreferences.edit()
-//                        registered = false
-//                        editor.putBoolean(user?.uid, registered)
-//                        editor.apply()
-//                        Log.e("success", "$it, añadido a SharedPrefrences : $registered")
-//
-//                    }
-//            } catch (e: Exception) {
-//                Log.e("CreatingDocumentForUser", "$e")
-//            }
-//
-//        } else {
-//            Log.e("registerUserInFirestore", "Ya registrado no se requiere acciones")
-//        }
-//    }
+    private fun registerUserInFirestore() {
+        if (registered) {
+            val c = Calendar.getInstance()
+            val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+            try {
+                FirebaseFirestore.getInstance().document("/usuarios/${user?.uid}")
+                    .set(hashMapOf("fechaCreated" to sdf.format(c.time)))
+                    .addOnFailureListener {
+                        Log.e("error", "$it, irrecuperable")
+                    }.addOnSuccessListener {
+                        editor = sharedPreferences.edit()
+                        registered = false
+                        editor.putBoolean(user?.uid, registered)
+                        editor.apply()
+                        Log.e("success", "$it, añadido a SharedPrefrences : $registered")
+
+                    }
+            } catch (e: Exception) {
+                Log.e("CreatingDocumentForUser", "$e")
+            }
+
+        } else {
+            Log.e("registerUserInFirestore", "Ya registrado no se requiere acciones")
+        }
+    }
 
     private fun checkPermisos() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

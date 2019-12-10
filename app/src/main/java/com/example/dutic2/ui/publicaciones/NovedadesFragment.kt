@@ -2,6 +2,7 @@ package com.example.dutic2.ui.publicaciones
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,26 +49,31 @@ class NovedadesFragment : Fragment(), PublicacionViewHolder.PublicacionClickList
         if (curso == null) {
             curso = novedadesViewModel.cursoModel
         }
-        val ref = FirebaseFirestore.getInstance().collection("${curso!!.idGeneral}/publicaciones")
-        val option = FirestoreRecyclerOptions.Builder<Publicacion>()
-            .setQuery(ref, SnapshotParser<Publicacion?> { snapshot: DocumentSnapshot ->
-                val retornar = snapshot.toObject(Publicacion::class.java)
-                retornar?.uid = snapshot.id
-                return@SnapshotParser retornar!!
+        try{
+            val ref = FirebaseFirestore.getInstance().collection("${curso!!.idGeneral}/publicaciones")
+            val option = FirestoreRecyclerOptions.Builder<Publicacion>()
+                .setQuery(ref, SnapshotParser<Publicacion?> { snapshot: DocumentSnapshot ->
+                    val retornar = snapshot.toObject(Publicacion::class.java)
+                    retornar?.uid = snapshot.id
+                    return@SnapshotParser retornar!!
 
-            }).setLifecycleOwner(viewLifecycleOwner).build()
-        novedadesViewModel.apply {
-            this.option = option
-            this.mPublicacionClickListener = this@NovedadesFragment
-            this.cursoModel = curso!!
+                }).setLifecycleOwner(viewLifecycleOwner).build()
+            novedadesViewModel.apply {
+                this.option = option
+                this.mPublicacionClickListener = this@NovedadesFragment
+                this.cursoModel = curso!!
+            }
+            novedades_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            var fra: FirestoreRecyclerAdapter<Publicacion, PublicacionViewHolder>?
+            novedadesViewModel.getFRA().observe(this, Observer {
+                fra = it
+                novedades_list.adapter = fra
+                fra?.startListening()
+            })
+        }catch (e:Exception){
+            Log.e("Error", e.localizedMessage!!)
         }
-        novedades_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        var fra: FirestoreRecyclerAdapter<Publicacion, PublicacionViewHolder>?
-        novedadesViewModel.getFRA().observe(this, Observer {
-            fra = it
-            novedades_list.adapter = fra
-            fra?.startListening()
-        })
+
 
     }
 
