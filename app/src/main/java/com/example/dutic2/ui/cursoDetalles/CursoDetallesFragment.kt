@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -129,13 +130,24 @@ class CursoDetallesFragment : Fragment() {
     }
 
     private fun eliminarCurso() {
-        borrarCurso(File(DIRECTORIO_RAIZ + File.separator + curso.nombre))
-        FirebaseFirestore.getInstance()
-            .document("/usuarios/${FirebaseAuth.getInstance().currentUser?.uid}/cursos/${curso.uid}")
-            .delete().addOnCompleteListener {
-            Toast.makeText(context!!, "Curso eliminado satisfactoriamente", Toast.LENGTH_SHORT)
-                .show()
-            findNavController().navigateUp()
+        try {
+            progressBar_curso_detalles.visibility = View.VISIBLE
+            val c = File(DIRECTORIO_RAIZ + File.separator + curso.nombre)
+            borrarCurso(c)
+            Log.e("detalles eliminar", "${c.absolutePath} , ${c.listFiles()}")
+            FirebaseFirestore.getInstance()
+                .document("/usuarios/${FirebaseAuth.getInstance().currentUser?.uid}/cursos/${curso.uid}")
+                .delete().addOnCompleteListener {
+                    Toast.makeText(
+                        context!!,
+                        "Curso eliminado satisfactoriamente",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    findNavController().navigateUp()
+                }
+        }catch (e:Exception){
+            Log.e("detalles eliminar", "${e.localizedMessage}")
         }
     }
 

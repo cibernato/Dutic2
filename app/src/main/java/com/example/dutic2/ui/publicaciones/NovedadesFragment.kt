@@ -29,7 +29,10 @@ import kotlinx.android.synthetic.main.fragment_novedades.*
  */
 class NovedadesFragment : Fragment(), PublicacionViewHolder.PublicacionClickListener {
     override fun onPublicacionClicked(publicacion: Publicacion) {
-        findNavController().navigate(R.id.nav_detallePublicacion, bundleOf("publicacion" to publicacion))
+        findNavController().navigate(
+            R.id.nav_detallePublicacion,
+            bundleOf("publicacion" to publicacion)
+        )
     }
 
 
@@ -49,8 +52,9 @@ class NovedadesFragment : Fragment(), PublicacionViewHolder.PublicacionClickList
         if (curso == null) {
             curso = novedadesViewModel.cursoModel
         }
-        try{
-            val ref = FirebaseFirestore.getInstance().collection("${curso!!.idGeneral}/publicaciones")
+        try {
+            val ref =
+                FirebaseFirestore.getInstance().collection("${curso!!.idGeneral}/publicaciones")
             val option = FirestoreRecyclerOptions.Builder<Publicacion>()
                 .setQuery(ref, SnapshotParser<Publicacion?> { snapshot: DocumentSnapshot ->
                     val retornar = snapshot.toObject(Publicacion::class.java)
@@ -63,14 +67,15 @@ class NovedadesFragment : Fragment(), PublicacionViewHolder.PublicacionClickList
                 this.mPublicacionClickListener = this@NovedadesFragment
                 this.cursoModel = curso!!
             }
-            novedades_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            novedades_list.layoutManager =
+                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             var fra: FirestoreRecyclerAdapter<Publicacion, PublicacionViewHolder>?
             novedadesViewModel.getFRA().observe(this, Observer {
                 fra = it
                 novedades_list.adapter = fra
                 fra?.startListening()
             })
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.e("Error", e.localizedMessage!!)
         }
 
