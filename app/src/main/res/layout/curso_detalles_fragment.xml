@@ -1,191 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo3">
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:padding="4dp"
+    android:background="#ffff">
 
-
-
-    <View
-        android:id="@+id/view1curso"
-        android:layout_width="340dp"
-        android:layout_height="73dp"
-        android:background="@drawable/hola_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
-
-    <TextView
-        android:id="@+id/texto_bienvenida"
-        android:layout_width="212dp"
-        android:layout_height="31dp"
-        android:gravity="center"
-        android:text="Hola, Juan PÃ©rez!"
-        android:textColor="#440E5D"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view1curso"
-        app:layout_constraintEnd_toEndOf="@+id/view1curso"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintStart_toStartOf="@+id/foto_usuario"
-        app:layout_constraintTop_toTopOf="@+id/view1curso"
-        app:layout_constraintVertical_bias="0.205" />
-
-    <TextView
-        android:id="@+id/pendientes_curso"
-        android:layout_width="217dp"
-        android:layout_height="20dp"
-        android:gravity="center"
-        android:text="Tienes 3 tareas pendientes"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view1curso"
-        app:layout_constraintEnd_toEndOf="@+id/view1curso"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="@+id/view1curso"
-        app:layout_constraintTop_toBottomOf="@+id/texto_bienvenida"
-        app:layout_constraintVertical_bias="0.323" />
-
-    <ImageView
-        android:id="@+id/foto_usuario"
-        android:layout_width="71dp"
-        android:layout_height="71dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view1curso"
-        app:layout_constraintEnd_toEndOf="@+id/view1curso"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="@+id/view1curso"
-        app:layout_constraintTop_toTopOf="@+id/view1curso"
-        android:src="@drawable/foto_perfil" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/fondo_curso"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view1curso"
-        app:layout_constraintVertical_bias="0.043" />
-
-    <Button
-        android:id="@+id/curso_detalles_calendario"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_curso_calendario"
-        android:text="Calendario"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/curso_detalles_notas_de_voz"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/curso_detalles_publicaciones"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:background="@drawable/btn_curso_tema"
-        android:text="Publicaciones"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/curso_detalles_notas_de_voz"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/curso_detalles_notas_de_voz"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/curso_detalles_notas_de_voz"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/btn_curso_tareas"
-        android:text="Notas de Voz"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/curso_detalles_nombre"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/curso_detalles_archivos"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:background="@drawable/btn_curso_archivos"
-        android:text="Archivos"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/curso_detalles_extras"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/curso_detalles_extras"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/curso_detalles_extras"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_curso_extras"
-        android:text="Extras"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/curso_detalles_calendario"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/curso_detalle_imagenes"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:background="@drawable/btn_curso_imagenes"
-        android:text="Imagenes"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/curso_detalles_calendario"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/curso_detalles_calendario"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/curso_detalles_nombre"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/curso_nombre"
-        android:textColor="#440E5D"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.441"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.0" />
+        >
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-    <ProgressBar
-        android:id="@+id/progressBar_curso_detalles"
-        android:elevation="10dp"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        <View
+            android:id="@+id/view1curso"
+            android:layout_width="356dp"
+            android:layout_height="91dp"
+            android:background="@drawable/hola_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.037" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/texto_bienvenida"
+            android:layout_width="237dp"
+            android:layout_height="54dp"
+            android:gravity="center"
+            android:text="Hola Juan PÃ©rez!"
+            android:textColor="#440E5D"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/view1curso"
+            app:layout_constraintEnd_toEndOf="@+id/view1curso"
+            app:layout_constraintHorizontal_bias="0.79"
+            app:layout_constraintStart_toStartOf="@+id/foto_usuario"
+            app:layout_constraintTop_toTopOf="@+id/view1curso"
+            app:layout_constraintVertical_bias="0.205" />
+
+        <TextView
+            android:id="@+id/pendientes_curso"
+            android:layout_width="217dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="Tienes 3 tareas pendientes"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view1curso"
+            app:layout_constraintEnd_toEndOf="@+id/view1curso"
+            app:layout_constraintHorizontal_bias="0.827"
+            app:layout_constraintStart_toStartOf="@+id/view1curso"
+            app:layout_constraintTop_toBottomOf="@+id/texto_bienvenida"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/foto_usuario"
+            android:layout_width="76dp"
+            android:layout_height="63dp"
+            android:src="@drawable/foto_perfil"
+            app:layout_constraintBottom_toBottomOf="@+id/view1curso"
+            app:layout_constraintEnd_toEndOf="@+id/view1curso"
+            app:layout_constraintHorizontal_bias="0.053"
+            app:layout_constraintStart_toStartOf="@+id/view1curso"
+            app:layout_constraintTop_toTopOf="@+id/view1curso" />
+
+        <Button
+            android:id="@+id/curso_detalles_publicaciones"
+            android:layout_width="300dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_curso_tema"
+            android:text="Publicaciones"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/curso_detalles_nombre"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/curso_detalle_imagenes"
+            android:layout_width="300dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_curso_imagenes"
+            android:text="Imagenes"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/curso_detalles_archivos"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/curso_detalles_calendario"
+            android:layout_width="300dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_curso_calendario"
+            android:text="Calendario"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/curso_detalle_imagenes"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/curso_detalles_notas_de_voz"
+            android:layout_width="300dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_curso_tareas"
+            android:text="Notas de Voz"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/curso_detalles_calendario"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/curso_detalles_archivos"
+            android:layout_width="300dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_curso_archivos"
+            android:text="Archivos"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/curso_detalles_publicaciones"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/curso_detalles_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/curso_nombre"
+            android:textColor="#440E5D"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1curso"
+            app:layout_constraintVertical_bias="0.034" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_curso_detalles"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

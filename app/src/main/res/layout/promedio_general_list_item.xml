@@ -8,22 +8,21 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/promedio_general_list_item_nota"
-        android:layout_width="107dp"
-        android:layout_height="0dp"
+        android:layout_width="133dp"
+        android:layout_height="109dp"
+        android:autoSizeTextType="uniform"
         android:background="@color/md_green_600"
         android:ellipsize="start"
-        android:autoSizeTextType="uniform"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="80sp"
         android:text="15.62"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.appcompat.widget.AppCompatTextView>
 

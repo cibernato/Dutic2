@@ -30,7 +30,7 @@
     <color name="brown_700">#5D4037</color>
     <color name="blue_grey_700">#455A64</color>
     <color name="orange_800">#EF6C00</color>
-    <color name="green_700">#388E3C</color>
+    <color name="green_700">#007382</color> <!---->
     <color name="teal_700">#00796B</color>
     <color name="pink_700">#C2185B</color>
     <color name="red_800">#c62828</color>
@@ -41,8 +41,8 @@
     <color name="example_7_yellow">#FFEB3B</color>
 
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#0083CF</color>
+    <color name="colorPrimaryDark">#002866</color>
     <color name="colorAccent">#D81B60</color>
     <!-- google's material design colours from
    http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->

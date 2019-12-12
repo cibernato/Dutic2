@@ -1,10 +1,12 @@
 package com.example.dutic2.ui.cursos
 
+import android.content.ContentUris
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
+import android.provider.CalendarContract
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
@@ -57,7 +59,7 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_cursos, container, false)
-        (activity as MainActivity).setColorBar(Color.parseColor("#43a047"))
+        (activity as MainActivity).setColorBar(resources.getColor(R.color.colorPrimary))
         val displaymetrics = DisplayMetrics()
         val devicewidth: Int
         activity!!.windowManager.defaultDisplay.getMetrics(displaymetrics)
@@ -104,7 +106,24 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
 
     private fun clickListeners() {
         btn_apuntes.setOnClickListener {
-
+            val args = Bundle()
+            var cursos: Array<Curso>? = null
+            activity?.let {
+                ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
+                    .getCursosActualizados().observe(this,
+                    Observer { array ->
+                        cursos = array
+                    })
+            }
+            try {
+                args.apply {
+                    putParcelableArray("cursos", cursos)
+                    putString("flag", "voz")
+                }
+                findNavController().navigate(R.id.nav_plantilla, args)
+            } catch (e: java.lang.Exception) {
+                Log.e("Error en try", "$e, values $cursos , args $args")
+            }
         }
         btn_notas.setOnClickListener {
             val args = Bundle()
@@ -119,10 +138,45 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
             }
         }
         btn_recordatorios.setOnClickListener {
-
+            //Toast.makeText(context!!, "Funcionalidad extra", Toast.LENGTH_LONG).show()
+            val args = Bundle()
+            var cursos: Array<Curso>? = null
+            activity?.let {
+                ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
+                    .getCursosActualizados().observe(this,
+                    Observer { array ->
+                        cursos = array
+                    })
+            }
+            try {
+                args.apply {
+                    putParcelableArray("cursos", cursos)
+                    putString("flag", "voz")
+                }
+                findNavController().navigate(R.id.nav_plantilla, args)
+            } catch (e: java.lang.Exception) {
+                Log.e("Error en try", "$e, values $cursos , args $args")
+            }
         }
         btn_otros.setOnClickListener {
-
+            val args = Bundle()
+            var cursos: Array<Curso>? = null
+            activity?.let {
+                ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
+                    .getCursosActualizados().observe(this,
+                    Observer { array ->
+                        cursos = array
+                    })
+            }
+            try {
+                args.apply {
+                    putParcelableArray("cursos", cursos)
+                    putString("flag", "voz")
+                }
+                findNavController().navigate(R.id.nav_plantilla, args)
+            } catch (e: java.lang.Exception) {
+                Log.e("Error en try", "$e, values $cursos , args $args")
+            }
         }
     }
 
@@ -135,23 +189,23 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.add_menu) {
             val d = AddCursoDialog.newInstance(Curso())
-            d.setTargetFragment(this,168)
-            d.show(fragmentManager!!,"s")
+            d.setTargetFragment(this, 168)
+            d.show(fragmentManager!!, "s")
 
         }
         return super.onOptionsItemSelected(item)
     }
 
 
-
     private fun addCurso(cursoPorSubir: Curso) {
-        FirebaseFirestore.getInstance().collection("/usuarios/${user?.uid}/cursos").add(cursoPorSubir).addOnSuccessListener{
-            Log.e("Prueba de subida", it.id)
-        }
+        FirebaseFirestore.getInstance().collection("/usuarios/${user?.uid}/cursos")
+            .add(cursoPorSubir).addOnSuccessListener {
+                Log.e("Prueba de subida", it.id)
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 168){
+        if (requestCode == 168) {
             addCurso(data?.getParcelableExtra<Curso>("curso")!!)
         }
         super.onActivityResult(requestCode, resultCode, data)

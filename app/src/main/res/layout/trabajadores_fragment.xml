@@ -19,10 +19,12 @@
 
     <Button
         android:id="@+id/add_trabajador_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="42dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/boton_rosa_ovalado"
         android:text="añadir"
+        android:textColor="#ffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +48,7 @@
         android:id="@+id/trabajadores_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:listitem="@layout/permiso_list_item"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

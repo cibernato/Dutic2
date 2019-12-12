@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/azul"
+    android:background="#202B3E"
     >
 
     <TextView
         android:id="@+id/publicaciones_nombre_curso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Curso 1: Negocios ElectrÃ³nicos"
+        android:text="Curso 1: Negocios Electronicos"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold|italic"

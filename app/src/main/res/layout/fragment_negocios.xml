@@ -4,43 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".negocios.ui.main.NegociosFragment">
+    tools:context=".negocios.ui.main.NegociosFragment"
+    android:background="#F6EBFF">
 
 
     <Button
         android:id="@+id/trabajadores_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="228dp"
+        android:layout_height="46dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/round_corners"
         android:text="Trabajadores"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/permisos_button"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.207" />
 
     <Button
         android:id="@+id/permisos_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="228dp"
+        android:layout_height="46dp"
+        android:background="@drawable/round_corners"
         android:text="Permisos"
-        app:layout_constraintBottom_toBottomOf="@+id/trabajadores_button"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/trabajadores_button"
-        app:layout_constraintTop_toTopOf="@+id/trabajadores_button" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trabajadores_button"
+        app:layout_constraintVertical_bias="0.04" />
 
     <Button
         android:id="@+id/transacciones_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Trabajdores y permisos"
+        android:layout_width="228dp"
+        android:layout_height="46dp"
+        android:background="@drawable/round_corners"
+        android:text="Transacciones"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/permisos_button"
-        app:layout_constraintStart_toStartOf="@+id/trabajadores_button"
-        app:layout_constraintTop_toBottomOf="@+id/trabajadores_button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/permisos_button"
+        app:layout_constraintVertical_bias="0.058" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
