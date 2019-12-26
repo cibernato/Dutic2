@@ -1,6 +1,8 @@
 package com.example.dutic2.adapters
 
 import android.app.Activity
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -50,6 +52,7 @@ class PromedioGeneralAdapter(
         holder.bind(cursos[position])
     }
 
+
     inner class PromedioGeneralHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var nota = itemView.findViewById<AppCompatTextView>(R.id.promedio_general_list_item_nota)
@@ -60,9 +63,8 @@ class PromedioGeneralAdapter(
 
         fun bind(curso: Curso) {
             titulo.text = curso.nombre
-            detalle.text = "vas tano porcientoa cumulado balbalbla"
-            Log.e("OnBind", "notal ${curso.promedioTotal}, array ${curso.promedios}")
             nota.text = curso.promedioTotal
+
             try {
 
                 val t = gson.fromJson<Array<Promedio>>(curso.promedios,
@@ -72,6 +74,23 @@ class PromedioGeneralAdapter(
                     progreso += it.porcentaje
                 }
                 pBar.progress = progreso
+                Log.e("OnBind", "Comapra para cada actrualizacion, promedio $progreso")
+
+                if (curso.promedioTotal!!.toDouble() > 10.5) {
+                    pBar.progressDrawable.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
+                    if (progreso in 50..99) {
+                        detalle.text =
+                            "Felicitaciones este curso ya esta aprobado, a subir esas notas."
+                    } else if (progreso == 100) {
+                        detalle.text = "Felicitaciones acabaste este curso."
+                    }
+
+                } else {
+                    pBar.progressDrawable.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
+                    detalle.text = "Ponle mas ganas falta poco."
+                    nota.setBackgroundColor(Color.RED)
+
+                }
                 itemView.setOnClickListener {
                     mPromedioGeneralClickListener.onPromedioGeneralListener(curso)
                 }

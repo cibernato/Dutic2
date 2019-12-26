@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="example_1_bg">#3A284C</color>
@@ -41,17 +38,17 @@
     <color name="example_7_yellow">#FFEB3B</color>
 
 
-    <color name="colorPrimary">#0083CF</color>
-    <color name="colorPrimaryDark">#002866</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorBackground">#ffffff</color>
-    <color name="colorSurface">#ffffff</color>
-    <color name="colorError">#B00020</color>
-    <color name="colorOnPrimary">#ffffff</color>
+    <color name="colorPrimary">#333333</color>
+    <color name="colorPrimaryDark">#212121</color>
+    <color name="colorAccent">#D89AF1</color>
+    <color name="colorBackground">#303030</color>
+    <color name="colorSurface">#121212</color>
+    <color name="colorError">#CF6679</color>
+    <color name="colorOnPrimary">#000000</color>
     <color name="colorOnSeconddary">#000000</color>
-    <color name="colorOnBackground">#000000</color>
-    <color name="colorOnSurface">#000000</color>
-    <color name="colorOnError">#ffffff</color>
+    <color name="colorOnBackground">#ffffff</color>
+    <color name="colorOnSurface">#ffffff</color>
+    <color name="colorOnError">#000000</color>
 
     <!-- google's material design colours from
    http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->

@@ -79,18 +79,26 @@ class PromediosFragment : Fragment(), PromedioAdapter.PromedioClickListener {
     }
 
     override fun onStop() {
-        val array = lista_promedios.toTypedArray()
-        val envio = gson.toJson(array)
-        val calendarioReferencia =
-            FirebaseFirestore.getInstance()
-                .document("/usuarios/${FirebaseAuth.getInstance().currentUser?.uid}/cursos/${curso.uid}")
-        Log.e("OnStop Promedio", "Guardando : $array , en JSON : $envio")
-        calendarioReferencia.set(hashMapOf("promedios" to envio, "promedioTotal" to "%.2f".format(notaAcumulada)), SetOptions.merge())
-            .addOnCompleteListener {
-                Log.e("OnStop Promedio", "Guardado exitosamente")
-            }.addOnFailureListener {
-            Log.e("OnStop Promedio", "eeror $it")
+        if (curso.uid != null) {
+            val array = lista_promedios.toTypedArray()
+            val envio = gson.toJson(array)
+            val calendarioReferencia =
+                FirebaseFirestore.getInstance()
+                    .document("/usuarios/${FirebaseAuth.getInstance().currentUser?.uid}/cursos/${curso.uid}")
+            Log.e("OnStop Promedio", "Guardando : $array , en JSON : $envio")
+            calendarioReferencia.set(
+                hashMapOf(
+                    "promedios" to envio,
+                    "promedioTotal" to "%.2f".format(notaAcumulada)
+                ), SetOptions.merge()
+            )
+                .addOnCompleteListener {
+                    Log.e("OnStop Promedio", "Guardado exitosamente")
+                }.addOnFailureListener {
+                    Log.e("OnStop Promedio", "eeror $it")
+                }
         }
+
         super.onStop()
     }
 

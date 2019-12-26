@@ -91,18 +91,17 @@
         <TextView
             android:id="@+id/texto_bienvenida"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/hola"
-            android:textColor="#440E5D"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/foto_usuario"
+            app:layout_constraintBottom_toTopOf="@+id/pendientes_curso"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/foto_usuario"
-            app:layout_constraintTop_toTopOf="@+id/foto_usuario"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/foto_usuario" />
 
         <TextView
             android:id="@+id/pendientes_curso"
@@ -142,7 +141,6 @@
             android:layout_marginTop="16dp"
             android:paddingBottom="8dp"
             android:text="@string/tus_cursos"
-            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,17 +1,17 @@
 package com.example.dutic2.ui.cursoDetalles
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -45,17 +45,32 @@ class CursoDetallesFragment : Fragment() {
     ): View? {
         setHasOptionsMenu(true)
         curso = arguments?.getParcelable<Curso>("curso") as Curso
-        var v = inflater.inflate(R.layout.curso_detalles_fragment, container, false)
+        val v = inflater.inflate(R.layout.curso_detalles_fragment, container, false)
 
         val displaymetrics = DisplayMetrics()
         activity!!.windowManager.defaultDisplay.getMetrics(displaymetrics)
-        val deviceheight: Int = displaymetrics.heightPixels / 10
+        val deviceheight =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                displaymetrics.widthPixels / 10
+            } else {
+                displaymetrics.widthPixels / 6
 
+            }
+        val viewHeight =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                displaymetrics.widthPixels / 8
+            } else {
+                displaymetrics.widthPixels / 4
+
+            }
         v.findViewById<Button>(R.id.curso_detalles_notas_de_voz).layoutParams.height = deviceheight
-        v.findViewById<Button>(R.id.curso_detalles_publicaciones).layoutParams.height = deviceheight
+        v.findViewById<Button>(R.id.curso_detalles_promedios).layoutParams.height = deviceheight
         v.findViewById<Button>(R.id.curso_detalles_archivos).layoutParams.height = deviceheight
         v.findViewById<Button>(R.id.curso_detalles_calendario).layoutParams.height = deviceheight
         v.findViewById<Button>(R.id.curso_detalle_imagenes).layoutParams.height = deviceheight
+        v.findViewById<ImageView>(R.id.foto_usuario).layoutParams.height = deviceheight
+        v.findViewById<ImageView>(R.id.foto_usuario).layoutParams.width = deviceheight
+        v.findViewById<View>(R.id.view1curso).layoutParams.height = viewHeight
 
         return v
     }
@@ -102,15 +117,12 @@ class CursoDetallesFragment : Fragment() {
         }
         val args = bundleOf("curso" to curso)
         curso_detalles_notas_de_voz.setOnClickListener {
-
             findNavController().navigate(R.id.nav_notas_de_voz, args)
         }
-        curso_detalles_publicaciones.setOnClickListener {
-
-            findNavController().navigate(R.id.nav_publicaciones, args)
+        curso_detalles_promedios.setOnClickListener {
+            findNavController().navigate(R.id.nav_promedio, bundleOf("curso" to curso))
         }
         curso_detalles_archivos.setOnClickListener {
-
             findNavController().navigate(R.id.nav_archivos, args)
         }
 

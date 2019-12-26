@@ -1,8 +1,12 @@
 package com.example.dutic2.activities
 
+import android.app.Activity
+import android.content.res.Configuration
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,6 +54,19 @@ class SharedMainViewModel : ViewModel() {
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CursoViewHolder {
                     val itemView = LayoutInflater.from(parent.context)
                         .inflate(R.layout.curso_list_item, parent, false)
+                    val displaymetrics = DisplayMetrics()
+                    (itemView.context as Activity).windowManager.defaultDisplay.getMetrics(
+                        displaymetrics
+                    )
+                    val c = (itemView.context as Activity).resources.configuration.orientation
+                    val deviceheight: Int = if (c == Configuration.ORIENTATION_LANDSCAPE) {
+                        (displaymetrics.widthPixels / 6).toInt()
+                    } else {
+                        displaymetrics.widthPixels / 3
+
+                    }
+                    itemView.findViewById<ConstraintLayout>(R.id.curso_list_item_layout)
+                        .layoutParams.height = deviceheight
                     return CursoViewHolder(itemView)
                 }
 

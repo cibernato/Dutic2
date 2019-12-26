@@ -18,6 +18,4 @@ data class Curso(
     override fun toString(): String {
         return "$uid, $nombre, $profesor, $tareasPendientes, $idGeneral, $tareasTotales, $tareasEntregadasNumero"
     }
-
-
 }

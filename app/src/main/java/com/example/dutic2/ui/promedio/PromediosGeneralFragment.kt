@@ -3,9 +3,7 @@ package com.example.dutic2.ui.promedio
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,6 +29,7 @@ class PromediosGeneralFragment : Fragment(), PromedioGeneralAdapter.PromedioGene
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         val t = arguments?.getParcelableArray("cursos") as Array<Curso>
         cursos?.addAll(t)
         return inflater.inflate(R.layout.fragment_promedios_general, container, false)
@@ -53,10 +52,6 @@ class PromediosGeneralFragment : Fragment(), PromedioGeneralAdapter.PromedioGene
     }
 
     private fun observeInput(sharedViewModel: SharedMainViewModel) {
-        sharedViewModel.getFRA().observe(this, Observer {
-            it.startListening()
-
-        })
         sharedViewModel.getCursosActualizados().observe(this, Observer {
             cursos2?.clear()
             cursos2?.addAll(it)
@@ -67,5 +62,19 @@ class PromediosGeneralFragment : Fragment(), PromedioGeneralAdapter.PromedioGene
 
     override fun onPromedioGeneralListener(curso: Curso) {
         findNavController().navigate(R.id.nav_promedio, bundleOf("curso" to curso))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.promedio_general_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.add_curso_rapido) {
+            findNavController().navigate(R.id.nav_promedio, bundleOf("curso" to Curso()))
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
