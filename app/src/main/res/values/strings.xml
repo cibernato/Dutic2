@@ -44,4 +44,5 @@
     <string name="si">Si</string>
     <string name="no">No</string>
     <string name="cambiar_idioma_titulo">Cambiar Idioma</string>
+    <string name="dutic_2_firebase_notification_channel_id" translatable="false">Canal de Notificaciones Firebase</string>
 </resources>

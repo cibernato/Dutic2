@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentUris
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,6 +13,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.provider.CalendarContract
@@ -36,7 +39,6 @@ import androidx.preference.PreferenceManager
 import com.example.dutic2.R
 import com.example.dutic2.models.Curso
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -48,6 +50,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.dutic2.utils.showToast
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -56,10 +59,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var mFirebaseAuth: FirebaseAuth
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
-    //    lateinit var expandableListView: ExpandableListView
-//    var titles: MutableList<String> = ArrayList()
-//    var items: MutableList<MutableList<String>> = ArrayList()
-//    private lateinit var adapter: ExpandableListAdapter
     private lateinit var mDrawerToggle: ActionBarDrawerToggle
     private lateinit var navView: NavigationView
     private lateinit var sharedPreferences: SharedPreferences
@@ -67,7 +66,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
     private var registered = false
     private lateinit var mAuthStateListener: FirebaseAuth.AuthStateListener
-    var gson = Gson()
     var cursos: Array<Curso>? = arrayOf()
     var sharedMainViewModel: SharedMainViewModel? = null
     val permisos = arrayOf(
@@ -84,6 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 permisos
             )
         }
+        createChannel("2", "Ya entendi xd")
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -95,12 +94,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AndroidThreeTen.init(this)
         mFirebaseAuth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.drawer_layout)
-        /*     navView = findViewById(R.id.nav_view)
-             expandableListView = this.findViewById(R.id.navList)
-             setupDrawerContent(navView)
-             genData()
-             addDrawersItem()
-             expandableListView.setAdapter(adapter)*/
         mDrawerToggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -150,13 +143,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             x = x and (ContextCompat.checkSelfPermission(this, it) == 0)
         }
         return x
-        /*val result =
-            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        val result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-        val result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED && result2 == PackageManager.PERMISSION_GRANTED*/
     }
-
 
     private fun requestPermissions(permisions: Array<String>) {
         ActivityCompat.requestPermissions(
@@ -216,6 +203,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> {
                 navController.navigate(R.id.nav_home)
             }
+
             R.id.nav_promediosGeneral -> {
                 val args = Bundle()
                 try {
@@ -227,6 +215,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Log.e("Error en try", "$e, values $cursos , args $args")
                 }
             }
+
             R.id.nav_configuraciones -> {
                 navController.navigate(R.id.nav_configuraciones)
             }
@@ -239,6 +228,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 pedirPermisosYContinuar(audioPermisisons, "voz")
 
             }
+
             R.id.nav_archivos -> {
                 val archivosPermisos = arrayOf(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -299,7 +289,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    fun pedirPermisosYContinuar(audioPermisisons: Array<String>, flag: String) {
+    private fun pedirPermisosYContinuar(audioPermisisons: Array<String>, flag: String) {
         if (checkPermissions(audioPermisisons)) {
             val args = Bundle()
             try {
@@ -360,21 +350,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == 589) {
-            val response = IdpResponse.fromResultIntent(data)
-
             if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in
-//                val user = FirebaseAuth.getInstance().currentUser
-                // ...
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                finish()
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
-            }
+                showToast("Bienvenido ${user?.displayName}", this)
+            } else if (resultCode == Activity.RESULT_CANCELED) finish()
         }
         if (requestCode == 654) {
             val c = NavHostFragment.findNavController(nav_host_fragment).currentDestination!!
@@ -412,6 +391,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         } else {
             super.onBackPressed()
+        }
+    }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = "Descripcion de una canal creado programaticacoment"
+
+            val notificationManager = this.getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager?.createNotificationChannel(notificationChannel)
+
         }
     }
 }

@@ -18,7 +18,7 @@ public class NumItemsInGridRow implements EpoxyModel.SpanSizeOverrideCallback {
     }
 
     /**
-     * Specify how many items to show per grid row on phone. Tablet will show more items per row according to a default ratio.
+     * Specify how many items to showToast per grid row on phone. Tablet will showToast more items per row according to a default ratio.
      */
     public static NumItemsInGridRow forPhoneWithDefaultScaling(Context context, int numItemsPerRowOnPhone) {
         return new NumItemsInGridRow(context, numItemsPerRowOnPhone, round(numItemsPerRowOnPhone * 1.5f), numItemsPerRowOnPhone * 2);

@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dutic2.R
+import com.example.dutic2.activities.ApuntesRapidosActivity
 import com.example.dutic2.activities.MainActivity
 import com.example.dutic2.activities.SharedMainViewModel
 import com.example.dutic2.dialogs.AddCursoDialog
@@ -98,24 +99,7 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
 
     private fun clickListeners() {
         btn_apuntes.setOnClickListener {
-            val args = Bundle()
-            var cursos: Array<Curso>? = null
-            activity?.let {
-                ViewModelProviders.of(it).get(SharedMainViewModel::class.java)
-                    .getCursosActualizados().observe(this,
-                    Observer { array ->
-                        cursos = array
-                    })
-            }
-            try {
-                args.apply {
-                    putParcelableArray("cursos", cursos)
-                    putString("flag", "voz")
-                }
-                findNavController().navigate(R.id.nav_plantilla, args)
-            } catch (e: java.lang.Exception) {
-                Log.e("Error en try", "$e, values $cursos , args $args")
-            }
+            startActivity(Intent(context,ApuntesRapidosActivity::class.java))
         }
         btn_notas.setOnClickListener {
             val args = Bundle()
@@ -130,7 +114,7 @@ class CursosFragment : Fragment(), CursoViewHolder.CursoClickListener {
             }
         }
         btn_recordatorios.setOnClickListener {
-            //Toast.makeText(context!!, "Funcionalidad extra", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context!!, "Funcionalidad extra", Toast.LENGTH_LONG).showToast()
             val args = Bundle()
             var cursos: Array<Curso>? = null
             activity?.let {

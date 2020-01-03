@@ -75,7 +75,7 @@ class ViewPagerDetalleFotosActivity : AppCompatActivity() {
 //
 //        val dialog_detalles = Dialog_detalles()
 //        dialog_detalles.setPhotoPath(fotos.get(viewPager.getCurrentItem()))
-//        dialog_detalles.show(supportFragmentManager, "kappa")
+//        dialog_detalles.showToast(supportFragmentManager, "kappa")
 //    }
 
     private fun eliminarFoto(currentItem: Int) {
