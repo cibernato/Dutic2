@@ -1,29 +1,27 @@
 package com.example.dutic2.utils
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.Rect
+import android.graphics.*
+import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import com.example.dutic2.R
+import java.util.*
 import kotlin.math.abs
 
-private const val STROKE_WIDTH = 12f // has to be float
+class CustomCanvas : View {
 
-class CustomCanvas(context: Context) : View(context) {
-//    private lateinit var extraCanvas: Canvas
-//    private lateinit var extraBitmap: Bitmap
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
 
     // Path representing the drawing so far
     private val drawing = Path()
     // Path representing what's currently being drawn
     private val curPath = Path()
-
-    private val backgroundColor = ResourcesCompat.getColor(resources, R.color.md_yellow_200, null)
 
     private val drawColor = ResourcesCompat.getColor(resources, R.color.md_deep_orange_600, null)
     // Set up the paint with which to draw.
@@ -36,9 +34,10 @@ class CustomCanvas(context: Context) : View(context) {
         style = Paint.Style.STROKE // default: FILL
         strokeJoin = Paint.Join.ROUND // default: MITER
         strokeCap = Paint.Cap.ROUND // default: BUTT
-        strokeWidth = STROKE_WIDTH // default: Hairline-width (really thin)
+        strokeWidth = strokeWidthVariable // default: Hairline-width (really thin)
     }
-//    private var path = Path()
+      private lateinit var extraCanvas: Canvas
+    private lateinit var extraBitmap: Bitmap
 
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
@@ -50,20 +49,25 @@ class CustomCanvas(context: Context) : View(context) {
 
     private lateinit var frame: Rect
 
+    var startClickTime = 0L
+    val MAX_DURATION = 200L
+
+    var strokeWidthVariable = 12f
+
     init {
         background = resources.getDrawable(R.color.md_yellow_200)
     }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldWidth, oldHeight)
-//        if (::extraBitmap.isInitialized) extraBitmap.recycle()
-//        extraBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-//        extraCanvas = Canvas(extraBitmap)
-//        extraCanvas.drawColor(backgroundColor)
+        if (::extraBitmap.isInitialized) extraBitmap.recycle()
+        extraBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        extraCanvas = Canvas(extraBitmap)
         // Calculate a rectangular frame around the picture.
 
         val inset = 40
         frame = Rect(inset, inset, width - inset, height - inset)
+
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -73,10 +77,7 @@ class CustomCanvas(context: Context) : View(context) {
         // Draw any current squiggle
         canvas.drawPath(curPath, paint)
         // Draw a frame around the canvas
-//        canvas.drawRect(frame, paint)
-//        canvas.drawBitmap(extraBitmap, 0f, 0f, null)
         canvas.drawRect(frame, paint)
-
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -84,22 +85,22 @@ class CustomCanvas(context: Context) : View(context) {
         motionTouchEventY = event.y
 
         when (event.action) {
-            MotionEvent.ACTION_DOWN -> touchStart()
+            MotionEvent.ACTION_DOWN -> {
+                startClickTime = Calendar.getInstance().timeInMillis
+                touchStart()
+            }
             MotionEvent.ACTION_MOVE -> touchMove()
-            MotionEvent.ACTION_UP -> touchUp()
+            MotionEvent.ACTION_UP -> touchUp(event)
         }
         return true
     }
 
     private fun touchStart() {
-        curPath.reset()
+        drawing.addPath(curPath)
         curPath.moveTo(motionTouchEventX, motionTouchEventY)
-//        path.reset()
-//        path.moveTo(motionTouchEventX, motionTouchEventY)
         currentX = motionTouchEventX
         currentY = motionTouchEventY
     }
-
     private fun touchMove() {
         val dx = abs(motionTouchEventX - currentX)
         val dy = abs(motionTouchEventY - currentY)
@@ -115,17 +116,25 @@ class CustomCanvas(context: Context) : View(context) {
             currentX = motionTouchEventX
             currentY = motionTouchEventY
             // Draw the path in the extra bitmap to cache it.
-//            extraCanvas.drawPath(path, paint)
         }
         invalidate()
+
     }
 
-    private fun touchUp() {
-        // Add the current path to the drawing so far
-        drawing.addPath(curPath)
-        // Rewind the current path for the next touch
-        curPath.reset()
+    private fun touchUp(event: MotionEvent) {
+        if( (Calendar.getInstance().timeInMillis-startClickTime)< MAX_DURATION ){
+            super.performClick()
+            var x = Canvas(extraBitmap)
+            draw(x)
+            Log.e("Click","Ocurrio un click bitmap ${extraBitmap.byteCount}")
+        }else{
+            Log.e("Click","cualquier cosa menos click xd")
+        }
     }
+
+
+
+
 
 
 }
