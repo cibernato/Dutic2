@@ -1,7 +1,9 @@
 package com.example.dutic2.utils
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.*
+import android.net.Uri
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -9,6 +11,10 @@ import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import com.example.dutic2.R
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import java.util.*
 import kotlin.math.abs
 
@@ -36,8 +42,8 @@ class CustomCanvas : View {
         strokeCap = Paint.Cap.ROUND // default: BUTT
         strokeWidth = strokeWidthVariable // default: Hairline-width (really thin)
     }
-      private lateinit var extraCanvas: Canvas
-    private lateinit var extraBitmap: Bitmap
+//    private lateinit var extraCanvas: Canvas
+//    lateinit var extraBitmap: Bitmap
 
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
@@ -60,9 +66,9 @@ class CustomCanvas : View {
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldWidth, oldHeight)
-        if (::extraBitmap.isInitialized) extraBitmap.recycle()
-        extraBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        extraCanvas = Canvas(extraBitmap)
+//        if (::extraBitmap.isInitialized) extraBitmap.recycle()
+//        extraBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+//        extraCanvas = Canvas(extraBitmap)
         // Calculate a rectangular frame around the picture.
 
         val inset = 40
@@ -78,6 +84,7 @@ class CustomCanvas : View {
         canvas.drawPath(curPath, paint)
         // Draw a frame around the canvas
         canvas.drawRect(frame, paint)
+
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -124,17 +131,9 @@ class CustomCanvas : View {
     private fun touchUp(event: MotionEvent) {
         if( (Calendar.getInstance().timeInMillis-startClickTime)< MAX_DURATION ){
             super.performClick()
-            var x = Canvas(extraBitmap)
-            draw(x)
-            Log.e("Click","Ocurrio un click bitmap ${extraBitmap.byteCount}")
         }else{
             Log.e("Click","cualquier cosa menos click xd")
         }
     }
-
-
-
-
-
 
 }

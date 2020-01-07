@@ -46,6 +46,3 @@ fun NotificationManager.sendNotification(messageBody: String, channelId: String,
 fun NotificationManager.cancelNotifications() {
     cancelAll()
 }
-fun showToast(mensaje:String, context:Context ){
-    makeText(context,mensaje,Toast.LENGTH_LONG).show()
-}

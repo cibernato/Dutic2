@@ -50,7 +50,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import com.example.dutic2.utils.showToast
+import com.example.dutic2.utils.toast
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -352,7 +352,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 589) {
             if (resultCode == Activity.RESULT_OK) {
-                showToast("Bienvenido ${user?.displayName}", this)
+                toast("Bienvenido ${user?.displayName}")
             } else if (resultCode == Activity.RESULT_CANCELED) finish()
         }
         if (requestCode == 654) {
